@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3326312371889252298}
   - component: {fileID: 3326312371889252293}
-  - component: {fileID: 3326312371889252299}
+  - component: {fileID: 3769521950125901184}
   - component: {fileID: 3326312371889252292}
   m_Layer: 0
   m_Name: Asteroid_5
@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3326312371889252295}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 25}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6422154272096624293}
@@ -50,8 +50,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &3326312371889252299
-SphereCollider:
+--- !u!136 &3769521950125901184
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -60,8 +60,9 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 4.5
+  m_Radius: 5
+  m_Height: 15
+  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3326312371889252292
 MonoBehaviour:
@@ -136,15 +137,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: dff3582f22aaef14b9c0b575cdaffa0e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: dff3582f22aaef14b9c0b575cdaffa0e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: dff3582f22aaef14b9c0b575cdaffa0e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dff3582f22aaef14b9c0b575cdaffa0e, type: 3}
