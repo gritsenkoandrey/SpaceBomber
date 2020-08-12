@@ -15,7 +15,7 @@ public sealed class AsteroidModel : MonoBehaviour
 
     private Rigidbody _asteroid;
     private Bullet _bullet;
-    private SpaceshipController _ship;
+    private SpaceshipModel _ship;
 
     private void Start()
     {
@@ -31,7 +31,7 @@ public sealed class AsteroidModel : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         _bullet = other.gameObject.GetComponent<Bullet>();
-        _ship = other.gameObject.GetComponent<SpaceshipController>();
+        _ship = other.gameObject.GetComponent<SpaceshipModel>();
 
         if (_bullet)
         {

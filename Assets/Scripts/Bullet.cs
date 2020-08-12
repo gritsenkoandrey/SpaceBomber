@@ -4,11 +4,18 @@
 public sealed class Bullet : MonoBehaviour
 {
     private Rigidbody _bullet;
-    private float _speed = 40.0f;
 
-    private void Start()
+    private void Awake()
     {
         _bullet = GetComponent<Rigidbody>();
-        _bullet.velocity = new Vector3(0, 0, _speed);
+    }
+
+    public void AddForce(Vector3 direction)
+    {
+        if (!_bullet)
+        {
+            return;
+        }
+        _bullet.AddForce(direction);
     }
 }

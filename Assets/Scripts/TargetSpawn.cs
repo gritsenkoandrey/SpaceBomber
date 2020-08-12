@@ -4,10 +4,13 @@
 public sealed class TargetSpawn : MonoBehaviour
 {
     [SerializeField] private AsteroidModel[] _asteroids;
+    [SerializeField] private SpaceshipEnemy _spaceshipEnemy;
 
-    private float _minDelay = 0.25f;
-    private float _maxdelay = 2.0f;
-    private float _nextLaunchTime = 0.25f;
+    private float _minDelay = 1.0f;
+    private float _maxdelay = 4.0f;
+
+    private float _nextAsteroid = 2.0f;
+    private float _nextSpaceshipEnemy = 2.0f;
 
     private float _posX;
     private float _posY = 0;
@@ -20,12 +23,32 @@ public sealed class TargetSpawn : MonoBehaviour
 
     private void Update()
     {
-        if (Time.time > _nextLaunchTime)
+        _posX = Random.Range(-transform.localScale.x / 2, transform.localScale.x / 2);
+
+        SpawnAsteroid();
+        SpawnSpaceshipEnemy();
+    }
+
+    private void SpawnAsteroid()
+    {
+        if (Time.time > _nextAsteroid)
         {
-            _posX = Random.Range(-transform.localScale.x / 2, transform.localScale.x / 2);
+            //_posX = Random.Range(-transform.localScale.x / 2, transform.localScale.x / 2);
+
             Instantiate(_asteroids[Random.Range(0, _asteroids.Length)],
                 new Vector3(_posX, _posY, _posZ), Quaternion.identity);
-            _nextLaunchTime = Time.time + Random.Range(_minDelay, _maxdelay);
+            _nextAsteroid = Time.time + Random.Range(_minDelay, _maxdelay);
+        }
+    }
+
+    private void SpawnSpaceshipEnemy()
+    {
+        if (Time.time > _nextSpaceshipEnemy)
+        {
+            //_posX = Random.Range(-transform.localScale.x / 2, transform.localScale.x / 2);
+
+            Instantiate(_spaceshipEnemy, new Vector3(_posX, _posY, _posZ), Quaternion.identity);
+            _nextSpaceshipEnemy = Time.time + Random.Range(_minDelay, _maxdelay);
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 
-public sealed class SpaceshipController : MonoBehaviour
+public sealed class SpaceshipController : SpaceshipModel
 {
     [SerializeField] private float _speed = 30.0f;
 
@@ -16,21 +16,9 @@ public sealed class SpaceshipController : MonoBehaviour
     private float _moveHorizontal;
     private float _moveVertical;
 
-    private readonly KeyCode _fire = KeyCode.Mouse0;
-
-    private Rigidbody _ship;
-    [SerializeField] Bullet _bullet;
-    [SerializeField] Transform[] _guns;
-
-    private void Start()
-    {
-        _ship = GetComponent<Rigidbody>();
-    }
-
     private void Update()
     {
         MoveShip();
-        Fire();
     }
 
     private void MoveShip()
@@ -46,15 +34,5 @@ public sealed class SpaceshipController : MonoBehaviour
 
         // поворот корабля
         _ship.rotation = Quaternion.Euler(_moveVertical * _tilt, 0, -_moveHorizontal * _tilt);
-    }
-
-    private void Fire()
-    {
-        if (Input.GetKeyDown(_fire))
-        {
-            Instantiate(_bullet, 
-                _guns[Random.Range(0, _guns.Length)].position,
-                _guns[Random.Range(0, _guns.Length)].rotation);
-        }
     }
 }
