@@ -3,7 +3,14 @@
 
 public sealed class Bullet : MonoBehaviour
 {
+    [SerializeField] private int _damage = 10;
     private Rigidbody _bullet;
+
+    public int Damage
+    {
+        get { return _damage; }
+        set { _damage = value; }
+    }
 
     private void Awake()
     {

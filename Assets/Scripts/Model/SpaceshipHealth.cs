@@ -1,12 +1,11 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.PoolObject;
+using UnityEngine;
 
 
 public sealed class SpaceshipHealth : SpaceshipModel
 {
     [SerializeField] private int _health = 100;
-    [SerializeField] private Object _explosion;
-
-    private Bullet _bullet;
+    private readonly string _explosionShip = "ShipExplosion";
 
     public int Health
     {
@@ -16,16 +15,15 @@ public sealed class SpaceshipHealth : SpaceshipModel
 
     private void OnTriggerEnter(Collider other)
     {
-        _bullet = other.gameObject.GetComponent<Bullet>();
+        bullet = other.gameObject.GetComponent<Bullet>();
 
-        if (_bullet)
+        if (bullet)
         {
-            Health -= 10;
-            Destroy(_bullet.gameObject);
-
+            Health -= bullet.Damage;
+            bullet.GetComponent<PoolObject>().ReturnToPool();
             if (_health <= 0)
             {
-                Instantiate(_explosion, this.gameObject.transform.position, Quaternion.identity);
+                PoolManager.GetObject(_explosionShip, this.gameObject.transform.position, Quaternion.identity);
                 Destroy(this.gameObject);
             }
         }
