@@ -682,11 +682,11 @@ MonoBehaviour:
   - Name: BulletBlue
     Prefab: {fileID: -2055978651918283125, guid: 30b26205444b28545a37ec1012b7e134,
       type: 3}
-    Count: 100
+    Count: 50
   - Name: BulletYellow
     Prefab: {fileID: -2639532657066676287, guid: 0fb6a1e22e20a414388f3e450e881ab3,
       type: 3}
-    Count: 100
+    Count: 50
   - Name: AsteroidExplosion
     Prefab: {fileID: -542622818460157958, guid: 2d7bf04e1c6193e40ae8c5e327eed8c9,
       type: 3}
@@ -1051,8 +1051,8 @@ GameObject:
   - component: {fileID: 1098396289}
   - component: {fileID: 1098396291}
   - component: {fileID: 1098396290}
-  - component: {fileID: 1098396292}
   - component: {fileID: 1098396293}
+  - component: {fileID: 1098396292}
   m_Layer: 0
   m_Name: Spaceship
   m_TagString: Untagged
@@ -1132,13 +1132,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1098396287}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b8a184c2ccec64419dcfddf2e11e002, type: 3}
+  m_Script: {fileID: 11500000, guid: 3402a976bf1cd7c42ad70c9e27393e0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gunOne: {fileID: 387153123}
-  _gunTwo: {fileID: 449907135}
-  _gunThree: {fileID: 614562829}
-  _gunFour: {fileID: 2056507670}
+  _health: 100
 --- !u!114 &1098396293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1148,12 +1145,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1098396287}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a54aad2de1532e44b0d458477037dd0, type: 3}
+  m_Script: {fileID: 11500000, guid: 5978245f216cff342abdb0c39746f1c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 100
-  _explosion: {fileID: 7165889601145711221, guid: 6495ae43276846543a875fbdf22091d3,
-    type: 3}
+  _gunOne: {fileID: 387153123}
+  _gunTwo: {fileID: 449907135}
+  _gunThree: {fileID: 614562829}
+  _gunFour: {fileID: 2056507670}
 --- !u!1 &1128317257
 GameObject:
   m_ObjectHideFlags: 0
@@ -1454,7 +1452,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1507687841
 MonoBehaviour:
   m_ObjectHideFlags: 0

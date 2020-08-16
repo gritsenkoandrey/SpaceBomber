@@ -1,5 +1,4 @@
-﻿using Boo.Lang;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 
@@ -29,6 +28,8 @@ namespace Assets.Scripts
             _scoreText.text = $"Score: {_score}";
         }
 
+        #region Event
+
         //private void OnEnable()
         //{
         //    foreach (var enemy in _enemies)
@@ -57,5 +58,7 @@ namespace Assets.Scripts
         //{
         //    Score += 10;
         //}
+
+        #endregion
     }
 }

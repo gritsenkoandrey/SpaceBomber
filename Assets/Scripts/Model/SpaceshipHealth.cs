@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.PoolObject;
+using System.Collections;
 using UnityEngine;
 
 
@@ -6,6 +7,7 @@ public sealed class SpaceshipHealth : SpaceshipModel
 {
     [SerializeField] private int _health = 100;
     private readonly string _explosionShip = "ShipExplosion";
+    private readonly float _returnToPool = 1.5f;
 
     public int Health
     {
@@ -23,7 +25,10 @@ public sealed class SpaceshipHealth : SpaceshipModel
             bullet.GetComponent<PoolObject>().ReturnToPool();
             if (_health <= 0)
             {
-                PoolManager.GetObject(_explosionShip, this.gameObject.transform.position, Quaternion.identity);
+                prefab = PoolManager.GetObject(_explosionShip,
+                    this.gameObject.transform.position, Quaternion.identity);
+                StartCoroutine(ReturnToPool(prefab));
+                // todo наш корабль
                 Destroy(this.gameObject);
             }
         }
@@ -31,5 +36,11 @@ public sealed class SpaceshipHealth : SpaceshipModel
         {
             return;
         }
+    }
+
+    private IEnumerator ReturnToPool(GameObject obj)
+    {
+        yield return new WaitForSeconds(_returnToPool);
+        obj.GetComponent<PoolObject>().ReturnToPool();
     }
 }

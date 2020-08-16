@@ -4,7 +4,7 @@
 namespace Assets.Scripts.PoolObject
 {
     [AddComponentMenu("Pool/PoolObject")]
-    public class PoolObject : MonoBehaviour
+    public sealed class PoolObject : MonoBehaviour
     {
         public void ReturnToPool()
         {

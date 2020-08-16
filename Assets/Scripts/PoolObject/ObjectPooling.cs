@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Assets.Scripts.PoolObject
 {
     [AddComponentMenu("Pool/ObjectPooling")]
-    public class ObjectPooling
+    public sealed class ObjectPooling
     {
         private List<PoolObject> _objects;
         private Transform _objectsParent;

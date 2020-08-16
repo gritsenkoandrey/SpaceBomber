@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts;
 using Assets.Scripts.PoolObject;
+using System.Collections;
 using UnityEngine;
 
 
@@ -10,7 +11,8 @@ public sealed class SpaceshipEnemy : SpaceshipEnemyModel, IFire
 
     private readonly string _bulletYellow = "BulletYellow";
     private readonly string _explosionShip = "ShipExplosion";
-    private readonly float _forceAmmunition = 2500.0f;
+    private readonly float _forceAmmunition = -75.0f;
+    private readonly float _returnToPool = 1.5f;
 
     private float _delay = 2.0f;
     private float _nextLaunchTime = 2.0f;
@@ -23,8 +25,7 @@ public sealed class SpaceshipEnemy : SpaceshipEnemyModel, IFire
 
     private void Start()
     {
-        ship = GetComponent<Rigidbody>();
-        ship.velocity = -new Vector3(0, 0, _speed);
+        Move();
     }
 
     private void Update()
@@ -39,7 +40,9 @@ public sealed class SpaceshipEnemy : SpaceshipEnemyModel, IFire
 
         if (bullet || spaceship)
         {
-            PoolManager.GetObject(_explosionShip, this.gameObject.transform.position, Quaternion.identity);
+            prefab = PoolManager.GetObject(_explosionShip,
+                this.gameObject.transform.position, Quaternion.identity);
+            StartCoroutine(ReturnToPool(prefab));
             this.gameObject.GetComponent<PoolObject>().ReturnToPool();
             //OnPointChange.Invoke();
             ScoreController.instance.Score += 10;
@@ -59,7 +62,6 @@ public sealed class SpaceshipEnemy : SpaceshipEnemyModel, IFire
         }
     }
 
-    //todo почему со временем пули у врагов начинают лететь быстрее
     public void Fire()
     {
         _ray = new Ray(_gun.position, -_gun.forward);
@@ -71,9 +73,22 @@ public sealed class SpaceshipEnemy : SpaceshipEnemyModel, IFire
             if (spaceship && Time.time > _nextLaunchTime)
             {
                 prefab = PoolManager.GetObject(_bulletYellow, _gun.position, Quaternion.identity);
-                prefab.GetComponent<Bullet>().AddForce(-_gun.forward * _forceAmmunition);
+                prefab.GetComponent<Bullet>().Velocity(_forceAmmunition);
+                //prefab.GetComponent<Bullet>().AddForce(-_gun.forward * _forceAmmunition);
                 _nextLaunchTime = Time.time + _delay;
             }
         }
+    }
+
+    private void Move()
+    {
+        ship = GetComponent<Rigidbody>();
+        ship.velocity = -new Vector3(0, 0, _speed);
+    }
+
+    private IEnumerator ReturnToPool(GameObject obj)
+    {
+        yield return new WaitForSeconds(_returnToPool);
+        obj.GetComponent<PoolObject>().ReturnToPool();
     }
 }

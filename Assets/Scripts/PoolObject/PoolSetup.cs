@@ -7,7 +7,7 @@ namespace Assets.Scripts.PoolObject
     /// Обертка для управления статическим классом PoolManage
     /// </summary>
     [AddComponentMenu("Pool/PoolSetup")]
-    public class PoolSetup : MonoBehaviour
+    public sealed class PoolSetup : MonoBehaviour
     {
         //структуры, где пользователь задает префаб для использования в пуле и инициализируемое количество
         [SerializeField] private PoolManager.PoolPart[] _pools;

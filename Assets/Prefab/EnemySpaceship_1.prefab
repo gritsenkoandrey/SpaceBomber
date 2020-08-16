@@ -153,15 +153,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8566375272874537207}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8050ad29d611a7241abd626932ea94e1, type: 3}
+  m_Script: {fileID: 11500000, guid: f9a909c5676393b48a60ff0160918620, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 15
-  _explosion: {fileID: 7165889601145711221, guid: 6495ae43276846543a875fbdf22091d3,
-    type: 3}
+  _speed: 10
   _gun: {fileID: 8566375274263601072}
-  _ammunition: {fileID: 24079765581150131, guid: 0fb6a1e22e20a414388f3e450e881ab3,
-    type: 3}
 --- !u!114 &7509504231381925281
 MonoBehaviour:
   m_ObjectHideFlags: 0

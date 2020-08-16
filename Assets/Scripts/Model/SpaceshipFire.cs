@@ -7,7 +7,11 @@ public sealed class SpaceshipFire : SpaceshipModel, IFire
 {
     private readonly int _leftButton = (int)MouseButton.LeftButton;
     private readonly int _rightButton = (int)MouseButton.RightButton;
-    private readonly float _forceAmmunition = 5000.0f;
+    private readonly float _forceAmmunition = 100.0f;
+
+    private float _delay = 0.5f;
+    private float _nextLaunchTime = 1.0f;
+
     private readonly string _bulletBlue = "BulletBlue";
     private readonly string _bulletYellow = "BulletYellow";
 
@@ -23,22 +27,30 @@ public sealed class SpaceshipFire : SpaceshipModel, IFire
 
     public void Fire()
     {
-        if (Input.GetMouseButtonDown(_leftButton))
+        if (Input.GetMouseButtonDown(_leftButton) && Time.time > _nextLaunchTime)
         {
             prefab = PoolManager.GetObject(_bulletBlue, _gunOne.position, Quaternion.identity);
-            prefab.GetComponent<Bullet>().AddForce(_gunOne.forward * _forceAmmunition);
+            prefab.GetComponent<Bullet>().Velocity(_forceAmmunition);
+            //prefab.GetComponent<Bullet>().AddForce(_gunOne.forward * _forceAmmunition);
 
             prefab = PoolManager.GetObject(_bulletBlue, _gunTwo.position, Quaternion.identity);
-            prefab.GetComponent<Bullet>().AddForce(_gunTwo.forward * _forceAmmunition);
+            prefab.GetComponent<Bullet>().Velocity(_forceAmmunition);
+            //prefab.GetComponent<Bullet>().AddForce(_gunTwo.forward * _forceAmmunition);
+
+            _nextLaunchTime = Time.time + _delay;
         }
 
-        if (Input.GetMouseButtonDown(_rightButton))
+        if (Input.GetMouseButtonDown(_rightButton) && Time.time > _nextLaunchTime)
         {
             prefab = PoolManager.GetObject(_bulletYellow, _gunThree.position, Quaternion.identity);
-            prefab.GetComponent<Bullet>().AddForce(_gunThree.forward * _forceAmmunition);
+            prefab.GetComponent<Bullet>().Velocity(_forceAmmunition);
+            //prefab.GetComponent<Bullet>().AddForce(_gunThree.forward * _forceAmmunition);
 
             prefab = PoolManager.GetObject(_bulletYellow, _gunFour.position, Quaternion.identity);
-            prefab.GetComponent<Bullet>().AddForce(_gunFour.forward * _forceAmmunition);
+            prefab.GetComponent<Bullet>().Velocity(_forceAmmunition);
+            //prefab.GetComponent<Bullet>().AddForce(_gunFour.forward * _forceAmmunition);
+
+            _nextLaunchTime = Time.time + _delay;
         }
     }
 }
