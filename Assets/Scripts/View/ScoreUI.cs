@@ -1,14 +1,15 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Model;
+using UnityEngine;
 using UnityEngine.UI;
 
 
 namespace Assets.Scripts
 {
-    public sealed class ScoreController : MonoBehaviour
+    public sealed class ScoreUI : BaseObjectScene
     {
         private int _score;
         private Text _scoreText;
-        internal static ScoreController instance;
+        internal static ScoreUI instance;
 
         public int Score
         {
@@ -16,8 +17,9 @@ namespace Assets.Scripts
             set { _score = value; }
         }
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             _scoreText = GetComponent<Text>();
             _scoreText.color = Color.green;
             instance = this;

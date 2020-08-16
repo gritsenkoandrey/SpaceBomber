@@ -1,10 +1,10 @@
 ﻿using Assets.Scripts;
+using Assets.Scripts.Interface;
 using Assets.Scripts.PoolObject;
-using System.Collections;
 using UnityEngine;
 
 
-public sealed class SpaceshipEnemy : SpaceshipEnemyModel, IFire
+public sealed class SpaceshipEnemy : SpaceshipEnemyModel, IFire, IMove
 {
     [SerializeField] private float _speed = 10.0f;
     [SerializeField] private Transform _gun;
@@ -12,7 +12,6 @@ public sealed class SpaceshipEnemy : SpaceshipEnemyModel, IFire
     private readonly string _bulletYellow = "BulletYellow";
     private readonly string _explosionShip = "ShipExplosion";
     private readonly float _forceAmmunition = -75.0f;
-    private readonly float _returnToPool = 1.5f;
 
     private float _delay = 2.0f;
     private float _nextLaunchTime = 2.0f;
@@ -20,6 +19,9 @@ public sealed class SpaceshipEnemy : SpaceshipEnemyModel, IFire
     private float _rayDistance = 100.0f;
     private Ray _ray;
     private RaycastHit _hit;
+
+    private Bullet _bullet;
+    private SpaceshipModel _spaceship;
 
     //public System.Action OnPointChange = delegate { };
 
@@ -35,25 +37,25 @@ public sealed class SpaceshipEnemy : SpaceshipEnemyModel, IFire
 
     private void OnTriggerEnter(Collider other)
     {
-        bullet = other.gameObject.GetComponent<Bullet>();
-        spaceship = other.gameObject.GetComponent<SpaceshipModel>();
+        _bullet = other.gameObject.GetComponent<Bullet>();
+        _spaceship = other.gameObject.GetComponent<SpaceshipModel>();
 
-        if (bullet || spaceship)
+        if (_bullet || _spaceship)
         {
             prefab = PoolManager.GetObject(_explosionShip,
                 this.gameObject.transform.position, Quaternion.identity);
             StartCoroutine(ReturnToPool(prefab));
             this.gameObject.GetComponent<PoolObject>().ReturnToPool();
             //OnPointChange.Invoke();
-            ScoreController.instance.Score += 10;
+            ScoreUI.instance.Score += 10;
 
-            if (bullet)
+            if (_bullet)
             {
-                bullet.GetComponent<PoolObject>().ReturnToPool();
+                _bullet.GetComponent<PoolObject>().ReturnToPool();
             }
             else
             {
-                Destroy(spaceship.gameObject);
+                Destroy(_spaceship.gameObject);
             }
         }
         else
@@ -68,9 +70,9 @@ public sealed class SpaceshipEnemy : SpaceshipEnemyModel, IFire
 
         if (Physics.Raycast(_ray, out _hit, _rayDistance))
         {
-            spaceship = _hit.collider.gameObject.GetComponent<SpaceshipModel>();
+            _spaceship = _hit.collider.gameObject.GetComponent<SpaceshipModel>();
 
-            if (spaceship && Time.time > _nextLaunchTime)
+            if (_spaceship && Time.time > _nextLaunchTime)
             {
                 prefab = PoolManager.GetObject(_bulletYellow, _gun.position, Quaternion.identity);
                 prefab.GetComponent<Bullet>().Velocity(_forceAmmunition);
@@ -80,15 +82,9 @@ public sealed class SpaceshipEnemy : SpaceshipEnemyModel, IFire
         }
     }
 
-    private void Move()
+    public void Move()
     {
-        ship = GetComponent<Rigidbody>();
-        ship.velocity = -new Vector3(0, 0, _speed);
-    }
-
-    private IEnumerator ReturnToPool(GameObject obj)
-    {
-        yield return new WaitForSeconds(_returnToPool);
-        obj.GetComponent<PoolObject>().ReturnToPool();
+        rigidbody = GetComponent<Rigidbody>();
+        rigidbody.velocity = -new Vector3(0, 0, _speed);
     }
 }

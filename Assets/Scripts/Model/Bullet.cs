@@ -1,20 +1,15 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Model;
+using UnityEngine;
 
 
-public sealed class Bullet : MonoBehaviour
+public sealed class Bullet : Ammunition
 {
     [SerializeField] private int _damage = 10;
-    private Rigidbody _bullet;
 
     public int Damage
     {
         get { return _damage; }
         set { _damage = value; }
-    }
-
-    private void Awake()
-    {
-        _bullet = GetComponent<Rigidbody>();
     }
 
     //public void AddForce(Vector3 direction)
@@ -28,6 +23,6 @@ public sealed class Bullet : MonoBehaviour
 
     public void Velocity(float speed)
     {
-        _bullet.velocity = new Vector3(0, 0, speed);
+        rigidbody.velocity = new Vector3(0, 0, speed);
     }
 }

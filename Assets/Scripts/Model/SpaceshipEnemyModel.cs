@@ -1,13 +1,10 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Model;
 
 
 namespace Assets.Scripts
 {
-    public abstract class SpaceshipEnemyModel : MonoBehaviour
+    public abstract class SpaceshipEnemyModel : BaseObjectScene
     {
-        protected Rigidbody ship;
-        protected Bullet bullet;
-        protected SpaceshipModel spaceship;
-        protected GameObject prefab;
+
     }
 }

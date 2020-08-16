@@ -1,5 +1,4 @@
-﻿using Assets.Scripts;
-using Assets.Scripts.PoolObject;
+﻿using Assets.Scripts.PoolObject;
 using UnityEngine;
 
 

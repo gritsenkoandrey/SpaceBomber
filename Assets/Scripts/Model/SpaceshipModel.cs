@@ -1,14 +1,7 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Model;
 
 
-public abstract class SpaceshipModel : MonoBehaviour
+public abstract class SpaceshipModel : BaseObjectScene
 {
-    protected Rigidbody ship;
-    protected GameObject prefab;
-    protected Bullet bullet;
 
-    protected void Start()
-    {
-        ship = GetComponent<Rigidbody>();
-    }
 }

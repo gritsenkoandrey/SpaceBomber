@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Interface;
+using UnityEngine;
 
 
-public sealed class SpaceshipController : SpaceshipModel
+public sealed class SpaceshipController : SpaceshipModel, IMove
 {
     [SerializeField] private float _speed = 30.0f;
 
@@ -20,21 +21,21 @@ public sealed class SpaceshipController : SpaceshipModel
 
     private void Update()
     {
-        MoveShip();
+        Move();
     }
 
-    private void MoveShip()
+    public void Move()
     {
         _moveHorizontal = Input.GetAxis("Horizontal");
         _moveVertical = Input.GetAxis("Vertical");
-        ship.velocity = new Vector3(_moveHorizontal, 0, _moveVertical) * _speed;
+        rigidbody.velocity = new Vector3(_moveHorizontal, 0, _moveVertical) * _speed;
 
         // границы карты
-        _clampPosX = Mathf.Clamp(ship.position.x, _xMin, _xMax);
-        _clampPosZ = Mathf.Clamp(ship.position.z, _zMin, _zMax);
-        ship.position = new Vector3(_clampPosX, 0, _clampPosZ);
+        _clampPosX = Mathf.Clamp(rigidbody.position.x, _xMin, _xMax);
+        _clampPosZ = Mathf.Clamp(rigidbody.position.z, _zMin, _zMax);
+        rigidbody.position = new Vector3(_clampPosX, 0, _clampPosZ);
 
         // поворот корабля
-        ship.rotation = Quaternion.Euler(_moveVertical * _tilt, 0, -_moveHorizontal * _tilt);
+        rigidbody.rotation = Quaternion.Euler(_moveVertical * _tilt, 0, -_moveHorizontal * _tilt);
     }
 }

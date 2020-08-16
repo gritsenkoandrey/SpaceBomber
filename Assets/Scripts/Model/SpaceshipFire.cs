@@ -31,11 +31,9 @@ public sealed class SpaceshipFire : SpaceshipModel, IFire
         {
             prefab = PoolManager.GetObject(_bulletBlue, _gunOne.position, Quaternion.identity);
             prefab.GetComponent<Bullet>().Velocity(_forceAmmunition);
-            //prefab.GetComponent<Bullet>().AddForce(_gunOne.forward * _forceAmmunition);
 
             prefab = PoolManager.GetObject(_bulletBlue, _gunTwo.position, Quaternion.identity);
             prefab.GetComponent<Bullet>().Velocity(_forceAmmunition);
-            //prefab.GetComponent<Bullet>().AddForce(_gunTwo.forward * _forceAmmunition);
 
             _nextLaunchTime = Time.time + _delay;
         }
@@ -44,11 +42,9 @@ public sealed class SpaceshipFire : SpaceshipModel, IFire
         {
             prefab = PoolManager.GetObject(_bulletYellow, _gunThree.position, Quaternion.identity);
             prefab.GetComponent<Bullet>().Velocity(_forceAmmunition);
-            //prefab.GetComponent<Bullet>().AddForce(_gunThree.forward * _forceAmmunition);
 
             prefab = PoolManager.GetObject(_bulletYellow, _gunFour.position, Quaternion.identity);
             prefab.GetComponent<Bullet>().Velocity(_forceAmmunition);
-            //prefab.GetComponent<Bullet>().AddForce(_gunFour.forward * _forceAmmunition);
 
             _nextLaunchTime = Time.time + _delay;
         }
