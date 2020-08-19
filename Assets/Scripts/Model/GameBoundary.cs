@@ -1,8 +1,9 @@
-﻿using Assets.Scripts.PoolObject;
+﻿using Assets.Scripts.Model;
+using Assets.Scripts.PoolObject;
 using UnityEngine;
 
 
-public sealed class GameBoundary : MonoBehaviour
+public sealed class GameBoundary : BaseObjectScene
 {
     private Bullet _bullet;
     private SpaceshipEnemy _enemy;

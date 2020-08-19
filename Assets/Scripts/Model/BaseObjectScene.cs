@@ -10,7 +10,7 @@ namespace Assets.Scripts.Model
         new protected Transform transform;
         protected GameObject prefab;
         private Color _color;
-        private readonly float _returnToPool = 1.5f;
+        private readonly float _timeToPool = 1.5f;
 
         public Color Color
         {
@@ -31,10 +31,10 @@ namespace Assets.Scripts.Model
             prefab = GetComponent<GameObject>();
         }
 
-        protected IEnumerator ReturnToPool(GameObject obj)
+        protected IEnumerator ReturnToPool(GameObject prefab)
         {
-            yield return new WaitForSeconds(_returnToPool);
-            obj.GetComponent<PoolObject.PoolObject>().ReturnToPool();
+            yield return new WaitForSeconds(_timeToPool);
+            prefab.GetComponent<PoolObject.PoolObject>().ReturnToPool();
         }
     }
 }

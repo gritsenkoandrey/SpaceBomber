@@ -1,12 +1,9 @@
-﻿using Assets.Scripts;
-using Assets.Scripts.PoolObject;
+﻿using Assets.Scripts.PoolObject;
 using UnityEngine;
 
 
-public sealed class SpaceshipFire : SpaceshipModel, IFire
+public sealed class SpaceshipFire : SpaceshipModel
 {
-    private readonly int _leftButton = (int)MouseButton.LeftButton;
-    private readonly int _rightButton = (int)MouseButton.RightButton;
     private readonly float _forceAmmunition = 100.0f;
 
     private float _delay = 0.5f;
@@ -20,14 +17,9 @@ public sealed class SpaceshipFire : SpaceshipModel, IFire
     [SerializeField] private Transform _gunThree;
     [SerializeField] private Transform _gunFour;
 
-    private void Update()
+    public void FireFirstWeapon()
     {
-        Fire();
-    }
-
-    public void Fire()
-    {
-        if (Input.GetMouseButtonDown(_leftButton) && Time.time > _nextLaunchTime)
+        if (Time.time > _nextLaunchTime)
         {
             prefab = PoolManager.GetObject(_bulletBlue, _gunOne.position, Quaternion.identity);
             prefab.GetComponent<Bullet>().Velocity(_forceAmmunition);
@@ -37,8 +29,11 @@ public sealed class SpaceshipFire : SpaceshipModel, IFire
 
             _nextLaunchTime = Time.time + _delay;
         }
+    }
 
-        if (Input.GetMouseButtonDown(_rightButton) && Time.time > _nextLaunchTime)
+    public void FireSecondWeapon()
+    {
+        if (Time.time > _nextLaunchTime)
         {
             prefab = PoolManager.GetObject(_bulletYellow, _gunThree.position, Quaternion.identity);
             prefab.GetComponent<Bullet>().Velocity(_forceAmmunition);

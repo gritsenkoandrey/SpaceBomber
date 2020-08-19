@@ -1,4 +1,6 @@
-﻿using Assets.Scripts.PoolObject;
+﻿using Assets.Scripts.Controller;
+using Assets.Scripts.PoolObject;
+using Assets.Scripts.ServiceLocators;
 using UnityEngine;
 
 
@@ -27,9 +29,10 @@ public sealed class SpaceshipHealth : SpaceshipModel
             {
                 prefab = PoolManager.GetObject(_explosionShip,
                     this.gameObject.transform.position, Quaternion.identity);
+                //explosion add to pool object
                 StartCoroutine(ReturnToPool(prefab));
-                // todo наш корабль
-                Destroy(this.gameObject);
+                
+                this.gameObject.GetComponent<PoolObject>().ReturnToPool();
             }
         }
         else

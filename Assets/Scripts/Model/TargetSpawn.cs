@@ -1,16 +1,16 @@
-﻿using Assets.Scripts.PoolObject;
+﻿using Assets.Scripts.Model;
+using Assets.Scripts.PoolObject;
 using UnityEngine;
 
 
-public sealed class TargetSpawn : MonoBehaviour
+public sealed class TargetSpawn : BaseObjectScene
 {
-    private readonly string[] _asteroids = 
-        { "Asteroid_1", "Asteroid_2", "Asteroid_3", "Asteroid_4", "Asteroid_5" };
-    private readonly string[] _enemyShips = 
-        { "EnemySpaceship_1", "EnemySpaceship_2", "EnemySpaceship_3", "EnemySpaceship_4",
-        "EnemySpaceship_5,", "EnemySpaceship_6", "EnemySpaceship_7", "EnemySpaceship_8",
-        "EnemySpaceship_9", "EnemySpaceship_10", "EnemySpaceship_11", "EnemySpaceship_12",
-        "EnemySpaceship_13" };
+    private readonly string[] _asteroids = { "Asteroid_1", "Asteroid_2",
+        "Asteroid_3", "Asteroid_4", "Asteroid_5" };
+    private readonly string[] _enemyShips = { "EnemySpaceship_1", "EnemySpaceship_2", 
+        "EnemySpaceship_3", "EnemySpaceship_4", "EnemySpaceship_5,", "EnemySpaceship_6",
+        "EnemySpaceship_7", "EnemySpaceship_8", "EnemySpaceship_9", "EnemySpaceship_10",
+        "EnemySpaceship_11", "EnemySpaceship_12", "EnemySpaceship_13" };
 
     private float _minDelay = 1.0f;
     private float _maxdelay = 4.0f;
@@ -24,12 +24,13 @@ public sealed class TargetSpawn : MonoBehaviour
 
     private float _difficulty;
 
-    private void Start()
+    protected override void Awake()
     {
+        base.Awake();
         _posZ = transform.position.z;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         _posX = Random.Range(-transform.localScale.x / 2, transform.localScale.x / 2);
 

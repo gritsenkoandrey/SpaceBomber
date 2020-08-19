@@ -22,9 +22,9 @@ public sealed class AsteroidModel : BaseObjectScene, IMove
     private SpaceshipEnemy _shipEnemy;
 
     //public System.Action OnPointChange = delegate { };
-
-    private void Start()
+    protected override void Awake()
     {
+        base.Awake();
         Move();
     }
 
@@ -51,7 +51,8 @@ public sealed class AsteroidModel : BaseObjectScene, IMove
                 this.gameObject.transform.position, Quaternion.identity);
             StartCoroutine(ReturnToPool(prefab));
             this.gameObject.GetComponent<PoolObject>().ReturnToPool();
-            Destroy(_ship.gameObject);
+            
+            _ship.GetComponent<PoolObject>().ReturnToPool();
         }
         else if (_shipEnemy)
         {

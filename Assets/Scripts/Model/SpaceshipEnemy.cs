@@ -1,10 +1,11 @@
 ﻿using Assets.Scripts;
 using Assets.Scripts.Interface;
+using Assets.Scripts.Model;
 using Assets.Scripts.PoolObject;
 using UnityEngine;
 
 
-public sealed class SpaceshipEnemy : SpaceshipEnemyModel, IFire, IMove
+public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove
 {
     [SerializeField] private float _speed = 10.0f;
     [SerializeField] private Transform _gun;
@@ -25,15 +26,16 @@ public sealed class SpaceshipEnemy : SpaceshipEnemyModel, IFire, IMove
 
     //public System.Action OnPointChange = delegate { };
 
-    private void Start()
+    protected override void Awake()
     {
+        base.Awake();
         Move();
     }
 
-    private void Update()
-    {
-        Fire();
-    }
+    //private void Update()
+    //{
+    //    Fire();
+    //}
 
     private void OnTriggerEnter(Collider other)
     {
@@ -44,6 +46,7 @@ public sealed class SpaceshipEnemy : SpaceshipEnemyModel, IFire, IMove
         {
             prefab = PoolManager.GetObject(_explosionShip,
                 this.gameObject.transform.position, Quaternion.identity);
+            //explosion return to pool
             StartCoroutine(ReturnToPool(prefab));
             this.gameObject.GetComponent<PoolObject>().ReturnToPool();
             //OnPointChange.Invoke();
@@ -55,7 +58,7 @@ public sealed class SpaceshipEnemy : SpaceshipEnemyModel, IFire, IMove
             }
             else
             {
-                Destroy(_spaceship.gameObject);
+                _spaceship.GetComponent<PoolObject>().ReturnToPool();
             }
         }
         else
@@ -67,7 +70,6 @@ public sealed class SpaceshipEnemy : SpaceshipEnemyModel, IFire, IMove
     public void Fire()
     {
         _ray = new Ray(_gun.position, -_gun.forward);
-
         if (Physics.Raycast(_ray, out _hit, _rayDistance))
         {
             _spaceship = _hit.collider.gameObject.GetComponent<SpaceshipModel>();
@@ -76,7 +78,6 @@ public sealed class SpaceshipEnemy : SpaceshipEnemyModel, IFire, IMove
             {
                 prefab = PoolManager.GetObject(_bulletYellow, _gun.position, Quaternion.identity);
                 prefab.GetComponent<Bullet>().Velocity(_forceAmmunition);
-                //prefab.GetComponent<Bullet>().AddForce(-_gun.forward * _forceAmmunition);
                 _nextLaunchTime = Time.time + _delay;
             }
         }
