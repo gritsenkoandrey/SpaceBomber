@@ -1,6 +1,6 @@
 ﻿using Assets.Scripts.Interface;
 using Assets.Scripts.ServiceLocators;
-using UnityEngine;
+
 
 namespace Assets.Scripts.Controller
 {
@@ -31,7 +31,6 @@ namespace Assets.Scripts.Controller
             _executeControllers[0] = ServiceLocator.Resolve<InputController>();
             _executeControllers[1] = ServiceLocator.Resolve<SpaceshipController>();
             _executeControllers[2] = ServiceLocator.Resolve<EnemySpaceshipController>();
-
         }
 
         public void Initialization()

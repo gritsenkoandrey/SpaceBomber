@@ -3,7 +3,7 @@ using Assets.Scripts.PoolObject;
 using UnityEngine;
 
 
-public sealed class TargetSpawn : BaseObjectScene
+public sealed class SpawnEnemy : BaseObjectScene
 {
     private readonly string[] _asteroids = { "Asteroid_1", "Asteroid_2",
         "Asteroid_3", "Asteroid_4", "Asteroid_5" };
@@ -16,7 +16,7 @@ public sealed class TargetSpawn : BaseObjectScene
     private float _maxdelay = 4.0f;
 
     private float _nextAsteroid = 2.0f;
-    private float _nextSpaceshipEnemy = 2.0f;
+    private float _nextSpaceshipEnemy = 1.0f;
 
     private float _posX;
     private float _posY = 0;
@@ -24,24 +24,20 @@ public sealed class TargetSpawn : BaseObjectScene
 
     private float _difficulty;
 
+    private GameObject _enemie;
+
+
     protected override void Awake()
     {
         base.Awake();
         _posZ = transform.position.z;
     }
 
-    private void FixedUpdate()
-    {
-        _posX = Random.Range(-transform.localScale.x / 2, transform.localScale.x / 2);
-
-        SpawnAsteroid();
-        SpawnSpaceshipEnemy();
-    }
-
-    private void SpawnAsteroid()
+    public void SpawnAsteroid()
     {
         if (Time.time > _nextAsteroid)
         {
+            _posX = RandomPosX();
             _difficulty += 0.15f;
 
             PoolManager.GetObject(_asteroids[Random.Range(0, _asteroids.Length)],
@@ -50,13 +46,27 @@ public sealed class TargetSpawn : BaseObjectScene
         }
     }
 
-    private void SpawnSpaceshipEnemy()
+    public void SpawnSpaceshipEnemies()
     {
         if (Time.time > _nextSpaceshipEnemy)
         {
-            PoolManager.GetObject(_enemyShips[Random.Range(0, _enemyShips.Length)],
+            _posX = RandomPosX();
+
+            _enemie = PoolManager.GetObject(_enemyShips[Random.Range(0, _enemyShips.Length)],
                 new Vector3(_posX, _posY, _posZ), Quaternion.identity);
             _nextSpaceshipEnemy = Time.time + Random.Range(_minDelay, _maxdelay);
+
+            //if(_enemie.TryGetComponent<SpaceshipEnemy>(out var enemy))
+            //{
+            //    EnemyManager.AddEnemieToList(enemy);
+            //}
+
+            EnemyManager.AddEnemieToList(_enemie.GetComponent<SpaceshipEnemy>());
         }
+    }
+
+    private float RandomPosX()
+    {
+        return Random.Range(-transform.localScale.x / 2, transform.localScale.x / 2);
     }
 }

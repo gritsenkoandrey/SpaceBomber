@@ -5,7 +5,7 @@ using Assets.Scripts.PoolObject;
 using UnityEngine;
 
 
-public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove
+public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove, IExecute
 {
     [SerializeField] private float _speed = 10.0f;
     [SerializeField] private Transform _gun;
@@ -24,18 +24,13 @@ public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove
     private Bullet _bullet;
     private SpaceshipModel _spaceship;
 
-    //public System.Action OnPointChange = delegate { };
+    public System.Action<SpaceshipEnemy> OnDieChange;
 
     protected override void Awake()
     {
         base.Awake();
         Move();
     }
-
-    //private void Update()
-    //{
-    //    Fire();
-    //}
 
     private void OnTriggerEnter(Collider other)
     {
@@ -49,22 +44,20 @@ public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove
             //explosion return to pool
             StartCoroutine(ReturnToPool(prefab));
             this.gameObject.GetComponent<PoolObject>().ReturnToPool();
-            //OnPointChange.Invoke();
             ScoreUI.instance.Score += 10;
-
-            if (_bullet)
-            {
-                _bullet.GetComponent<PoolObject>().ReturnToPool();
-            }
-            else
-            {
-                _spaceship.GetComponent<PoolObject>().ReturnToPool();
-            }
+            OnDieChange?.Invoke(this);
+            if (_bullet) _bullet.GetComponent<PoolObject>().ReturnToPool();
+            else _spaceship.GetComponent<PoolObject>().ReturnToPool();
         }
         else
         {
             return;
         }
+    }
+
+    public void Execute()
+    {
+        Fire();
     }
 
     public void Fire()
