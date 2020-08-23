@@ -21,14 +21,14 @@ public sealed class SpaceshipMove : SpaceshipModel, IMove
     public void Move()
     {
         _input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        rigidbody.velocity = new Vector3(_input.x, 0, _input.y) * _speed;
+        Rigidbody.velocity = new Vector3(_input.x, 0, _input.y) * _speed;
 
         // граница карты
-        _clampPosX = Mathf.Clamp(rigidbody.position.x, _xMin, _xMax);
-        _clampPosZ = Mathf.Clamp(rigidbody.position.z, _zMin, _zMax);
-        rigidbody.position = new Vector3(_clampPosX, 0, _clampPosZ);
+        _clampPosX = Mathf.Clamp(Rigidbody.position.x, _xMin, _xMax);
+        _clampPosZ = Mathf.Clamp(Rigidbody.position.z, _zMin, _zMax);
+        Rigidbody.position = new Vector3(_clampPosX, 0, _clampPosZ);
 
         // поворот корабля
-        rigidbody.rotation = Quaternion.Euler(_input.y * _tilt, 0, _input.x * _tilt);
+        Rigidbody.rotation = Quaternion.Euler(_input.y, 0, -_input.x * _tilt);
     }
 }

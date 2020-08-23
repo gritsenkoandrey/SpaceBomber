@@ -21,7 +21,7 @@ namespace Assets.Scripts.Model
             }
         }
 
-        private static void RemoveEnemieToList(SpaceshipEnemy enemy)
+        public static void RemoveEnemieToList(SpaceshipEnemy enemy)
         {
             if (!_enemiesList.Contains(enemy))
             {

@@ -6,17 +6,13 @@ namespace Assets.Scripts.Model
 {
     public abstract class BaseObjectScene : MonoBehaviour
     {
-        new protected Rigidbody rigidbody;
-        new protected Transform transform;
+        [HideInInspector] public Rigidbody Rigidbody;
+        [HideInInspector] public Transform Transform;
         protected GameObject prefab;
-        private Color _color;
+        private Renderer _renderer;
+        private Collider _collider;
         private readonly float _timeToPool = 1.5f;
-
-        public Color Color
-        {
-            get { return _color; }
-            set { _color = value; }
-        }
+        private bool _isVisible;
 
         public string Name
         {
@@ -24,11 +20,47 @@ namespace Assets.Scripts.Model
             set { gameObject.name = value; }
         }
 
+        public bool IsVisible
+        {
+            get { return _isVisible; }
+            set
+            {
+                _isVisible = value;
+                RendererSetActive(transform);
+                if (transform.childCount <= 0)
+                {
+                    return;
+                }
+                foreach (Transform t in transform)
+                {
+                    RendererSetActive(t);
+                }
+            }
+        }
+
         protected virtual void Awake()
         {
-            rigidbody = GetComponent<Rigidbody>();
-            transform = GetComponent<Transform>();
+            Rigidbody = GetComponent<Rigidbody>();
+            Transform = GetComponent<Transform>();
             prefab = GetComponent<GameObject>();
+        }
+
+        public void SetActive(bool value)
+        {
+            IsVisible = value;
+            if (TryGetComponent(out _collider))
+            {
+                _collider.enabled = value;
+            }
+        }
+
+        private void RendererSetActive(Transform value)
+        {
+            _renderer = value.gameObject.GetComponent<Renderer>();
+            if (_renderer)
+            {
+                _renderer.enabled = _isVisible;
+            }
         }
 
         protected IEnumerator ReturnToPool(GameObject prefab)

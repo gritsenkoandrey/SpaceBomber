@@ -13,7 +13,7 @@ public sealed class SpawnEnemy : BaseObjectScene
         "EnemySpaceship_11", "EnemySpaceship_12", "EnemySpaceship_13" };
 
     private float _minDelay = 1.0f;
-    private float _maxdelay = 4.0f;
+    private float _maxDelay = 4.0f;
 
     private float _nextAsteroid = 2.0f;
     private float _nextSpaceshipEnemy = 1.0f;
@@ -42,7 +42,7 @@ public sealed class SpawnEnemy : BaseObjectScene
 
             PoolManager.GetObject(_asteroids[Random.Range(0, _asteroids.Length)],
                 new Vector3(_posX, _posY, _posZ), Quaternion.identity);
-            _nextAsteroid = Time.time + Random.Range(_minDelay, _maxdelay) / _difficulty;
+            _nextAsteroid = Time.time + Random.Range(_minDelay, _maxDelay) / _difficulty;
         }
     }
 
@@ -54,14 +54,8 @@ public sealed class SpawnEnemy : BaseObjectScene
 
             _enemie = PoolManager.GetObject(_enemyShips[Random.Range(0, _enemyShips.Length)],
                 new Vector3(_posX, _posY, _posZ), Quaternion.identity);
-            _nextSpaceshipEnemy = Time.time + Random.Range(_minDelay, _maxdelay);
-
-            //if(_enemie.TryGetComponent<SpaceshipEnemy>(out var enemy))
-            //{
-            //    EnemyManager.AddEnemieToList(enemy);
-            //}
-
             EnemyManager.AddEnemieToList(_enemie.GetComponent<SpaceshipEnemy>());
+            _nextSpaceshipEnemy = Time.time + Random.Range(_minDelay, _maxDelay);
         }
     }
 

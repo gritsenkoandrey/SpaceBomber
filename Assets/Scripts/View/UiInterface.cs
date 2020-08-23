@@ -1,0 +1,48 @@
+﻿using UnityEngine;
+
+
+namespace Assets.Scripts.View
+{
+    public sealed class UiInterface
+    {
+        private ScoreUI _scoreUI;
+        private SpaceshipHealthBarUi _spaceshipHealthBarUi;
+        private SpaceshipHealthTextUi _spaceshipHealthTextUi;
+
+        public ScoreUI ScoreUI
+        {
+            get
+            {
+                if (!_scoreUI)
+                {
+                    _scoreUI = Object.FindObjectOfType<ScoreUI>();
+                }
+                return _scoreUI;
+            }
+        }
+
+        public SpaceshipHealthBarUi SpaceshipHealthBarUi
+        {
+            get
+            {
+                if (!_spaceshipHealthBarUi)
+                {
+                    _spaceshipHealthBarUi = Object.FindObjectOfType<SpaceshipHealthBarUi>();
+                }
+                return _spaceshipHealthBarUi;
+            }
+        }
+
+        public SpaceshipHealthTextUi SpaceshipHealthTextUi
+        {
+            get
+            {
+                if (!_spaceshipHealthTextUi)
+                {
+                    _spaceshipHealthTextUi = Object.FindObjectOfType<SpaceshipHealthTextUi>();
+                }
+                return _spaceshipHealthTextUi;
+            }
+        }
+    }
+}

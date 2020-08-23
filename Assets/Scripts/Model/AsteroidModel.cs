@@ -14,14 +14,16 @@ public sealed class AsteroidModel : BaseObjectScene, IMove
     private float _minSpeed = 5.0f;
     private float _maxSpeed = 25.0f;
 
+    private float _collisionDamage = 100.0f;
+
     private readonly string _explosionAsteroid = "AsteroidExplosion";
     private readonly string _explosionShip = "ShipExplosion";
 
     private Bullet _bullet;
     private SpaceshipModel _ship;
     private SpaceshipEnemy _shipEnemy;
+    private SpaceshipHealth _health;
 
-    //public System.Action OnPointChange = delegate { };
     protected override void Awake()
     {
         base.Awake();
@@ -33,6 +35,7 @@ public sealed class AsteroidModel : BaseObjectScene, IMove
         _bullet = other.gameObject.GetComponent<Bullet>();
         _ship = other.gameObject.GetComponent<SpaceshipModel>();
         _shipEnemy = other.gameObject.GetComponent<SpaceshipEnemy>();
+        _health = other.gameObject.GetComponent<SpaceshipHealth>();
 
         if (_bullet)
         {
@@ -43,10 +46,11 @@ public sealed class AsteroidModel : BaseObjectScene, IMove
             _bullet.GetComponent<PoolObject>().ReturnToPool();
 
             ScoreUI.instance.Score += 10;
-            //OnPointChange.Invoke();
         }
         else if (_ship)
         {
+            _health.CurrentHealth -= _collisionDamage;
+
             prefab = PoolManager.GetObject(_explosionShip,
                 this.gameObject.transform.position, Quaternion.identity);
             StartCoroutine(ReturnToPool(prefab));
@@ -71,7 +75,7 @@ public sealed class AsteroidModel : BaseObjectScene, IMove
     {
         _rotation = Random.Range(_minRotation, _maxRotation);
         // случайное вращение астеройда
-        rigidbody.angularVelocity = Random.insideUnitSphere * _rotation;
-        rigidbody.velocity = new Vector3(0, 0, -Random.Range(_minSpeed, _maxSpeed));
+        Rigidbody.angularVelocity = Random.insideUnitSphere * _rotation;
+        Rigidbody.velocity = new Vector3(0, 0, -Random.Range(_minSpeed, _maxSpeed));
     }
 }

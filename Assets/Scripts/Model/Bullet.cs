@@ -23,6 +23,6 @@ public sealed class Bullet : Ammunition
 
     public void Velocity(float speed)
     {
-        rigidbody.velocity = new Vector3(0, 0, speed);
+        Rigidbody.velocity = new Vector3(0, 0, speed);
     }
 }

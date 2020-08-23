@@ -1,13 +1,16 @@
 ﻿using Assets.Scripts.Model;
+using Assets.Scripts.View;
 
 
 namespace Assets.Scripts.Controller
 {
     public abstract class BaseController
     {
+        protected UiInterface uiInterface;
+
         protected BaseController()
         {
-
+            uiInterface = new UiInterface();
         }
 
         public bool IsActive { get; private set; }

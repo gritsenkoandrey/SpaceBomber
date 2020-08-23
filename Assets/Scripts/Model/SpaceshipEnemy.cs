@@ -14,6 +14,8 @@ public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove, IExecute
     private readonly string _explosionShip = "ShipExplosion";
     private readonly float _forceAmmunition = -75.0f;
 
+    private readonly float _collisionDamage = 100.0f;
+
     private float _delay = 2.0f;
     private float _nextLaunchTime = 2.0f;
 
@@ -23,6 +25,7 @@ public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove, IExecute
 
     private Bullet _bullet;
     private SpaceshipModel _spaceship;
+    private SpaceshipHealth _health;
 
     public System.Action<SpaceshipEnemy> OnDieChange;
 
@@ -36,6 +39,7 @@ public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove, IExecute
     {
         _bullet = other.gameObject.GetComponent<Bullet>();
         _spaceship = other.gameObject.GetComponent<SpaceshipModel>();
+        _health = other.gameObject.GetComponent<SpaceshipHealth>();
 
         if (_bullet || _spaceship)
         {
@@ -45,9 +49,13 @@ public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove, IExecute
             StartCoroutine(ReturnToPool(prefab));
             this.gameObject.GetComponent<PoolObject>().ReturnToPool();
             ScoreUI.instance.Score += 10;
-            OnDieChange?.Invoke(this);
+            OnDieChange.Invoke(this);
             if (_bullet) _bullet.GetComponent<PoolObject>().ReturnToPool();
-            else _spaceship.GetComponent<PoolObject>().ReturnToPool();
+            else
+            {
+                _health.CurrentHealth -= _collisionDamage;
+                _spaceship.GetComponent<PoolObject>().ReturnToPool();
+            }
         }
         else
         {
@@ -78,7 +86,7 @@ public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove, IExecute
 
     public void Move()
     {
-        rigidbody = GetComponent<Rigidbody>();
-        rigidbody.velocity = -new Vector3(0, 0, _speed);
+        Rigidbody = GetComponent<Rigidbody>();
+        Rigidbody.velocity = -new Vector3(0, 0, _speed);
     }
 }
