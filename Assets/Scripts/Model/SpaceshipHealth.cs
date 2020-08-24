@@ -1,17 +1,22 @@
-﻿using Assets.Scripts.PoolObject;
+﻿using Assets.Scripts.Model;
+using Assets.Scripts.PoolObject;
 using UnityEngine;
 
 
 public sealed class SpaceshipHealth : SpaceshipModel
 {
-    [SerializeField] private float _maxHealth = 100.0f;
+    [SerializeField] private readonly float _maxHealth = 100.0f;
     private float _currentHealth;
     private readonly float _minHealth = 0;
     private readonly float _quarter = 0.25f;
     private readonly float _maxPercent = 100.0f;
+
     private readonly string _explosionShip = "ShipExplosion";
+    private readonly string _explosionAsteroid = "AsteroidExplosion";
 
     private Bullet _bullet;
+    private SpaceshipEnemy _enemyShip;
+    private AsteroidModel _asteroid;
 
     public float CurrentHealth
     {
@@ -24,7 +29,7 @@ public sealed class SpaceshipHealth : SpaceshipModel
         get { return _currentHealth / _maxHealth; }
     }
 
-    public float AverageHealt
+    public float AverageHealth
     {
         get { return _maxHealth * _quarter; }
     }
@@ -53,24 +58,41 @@ public sealed class SpaceshipHealth : SpaceshipModel
     private void OnTriggerEnter(Collider other)
     {
         _bullet = other.gameObject.GetComponent<Bullet>();
+        _enemyShip = other.gameObject.GetComponent<SpaceshipEnemy>();
+        _asteroid = other.gameObject.GetComponent<AsteroidModel>();
 
-        if (_bullet)
+        if (_bullet || _enemyShip || _asteroid)
         {
-            CurrentHealth -= _bullet.Damage;
-            _bullet.GetComponent<PoolObject>().ReturnToPool();
+            if (_bullet)
+            {
+                CurrentHealth -= _bullet.Damage;
+                _bullet.GetComponent<PoolObject>().ReturnToPool();
+            }
+            else if (_enemyShip)
+            {
+                CurrentHealth -= _enemyShip.CollisionDamage;
+                prefab = PoolManager.GetObject
+                    (_explosionShip, _enemyShip.transform.position, Quaternion.identity);
+                StartCoroutine(ReturnToPool(prefab));
+                _enemyShip.GetComponent<PoolObject>().ReturnToPool();
+            }
+            else if (_asteroid)
+            {
+                CurrentHealth -= _asteroid.CollisionDamage;
+                prefab = PoolManager.GetObject
+                    (_explosionAsteroid, this.gameObject.transform.position, Quaternion.identity);
+                StartCoroutine(ReturnToPool(prefab));
+                _asteroid.GetComponent<PoolObject>().ReturnToPool();
+            }
+
             if (_currentHealth <= 0)
             {
-                prefab = PoolManager.GetObject(_explosionShip,
-                    this.gameObject.transform.position, Quaternion.identity);
+                prefab = PoolManager.GetObject
+                    (_explosionShip, this.gameObject.transform.position, Quaternion.identity);
                 //explosion add to pool object
                 StartCoroutine(ReturnToPool(prefab));
-                
                 this.gameObject.GetComponent<PoolObject>().ReturnToPool();
             }
-        }
-        else
-        {
-            return;
         }
     }
 }

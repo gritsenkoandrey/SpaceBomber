@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Controller
 {
-    public sealed class EnemySpaceshipController : BaseController, IExecute, IInitialization
+    public sealed class EnemyController : BaseController, IExecute, IInitialization
     {
         private SpawnEnemy _spawnEnemy;
 

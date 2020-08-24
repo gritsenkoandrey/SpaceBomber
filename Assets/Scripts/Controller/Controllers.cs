@@ -25,12 +25,12 @@ namespace Assets.Scripts.Controller
         {
             ServiceLocator.SetService(new InputController());
             ServiceLocator.SetService(new SpaceshipController());
-            ServiceLocator.SetService(new EnemySpaceshipController());
+            ServiceLocator.SetService(new EnemyController());
 
             _executeControllers = new IExecute[3];
             _executeControllers[0] = ServiceLocator.Resolve<InputController>();
             _executeControllers[1] = ServiceLocator.Resolve<SpaceshipController>();
-            _executeControllers[2] = ServiceLocator.Resolve<EnemySpaceshipController>();
+            _executeControllers[2] = ServiceLocator.Resolve<EnemyController>();
         }
 
         public void Initialization()
@@ -45,7 +45,7 @@ namespace Assets.Scripts.Controller
 
             ServiceLocator.Resolve<InputController>().On();
             ServiceLocator.Resolve<SpaceshipController>().On();
-            ServiceLocator.Resolve<EnemySpaceshipController>().On();
+            ServiceLocator.Resolve<EnemyController>().On();
         }
 
         public void Cleanup()

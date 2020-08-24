@@ -77,10 +77,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34d528b4726b5e04895136350bb31ca5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _explosionAsteroid: {fileID: 8308911843259437979, guid: 2d7bf04e1c6193e40ae8c5e327eed8c9,
-    type: 3}
-  _explosionShip: {fileID: 7165889601145711221, guid: 6495ae43276846543a875fbdf22091d3,
-    type: 3}
+  Rigidbody: {fileID: 0}
+  Transform: {fileID: 0}
+  _collisionDamage: 20
 --- !u!114 &1077058320675988803
 MonoBehaviour:
   m_ObjectHideFlags: 0

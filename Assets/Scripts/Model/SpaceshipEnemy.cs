@@ -7,14 +7,13 @@ using UnityEngine;
 
 public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove, IExecute
 {
-    [SerializeField] private float _speed = 10.0f;
+    [SerializeField] private readonly float _speed = 10.0f;
     [SerializeField] private Transform _gun;
+    [SerializeField] private float _collisionDamage = 50.0f;
 
     private readonly string _bulletYellow = "BulletYellow";
     private readonly string _explosionShip = "ShipExplosion";
     private readonly float _forceAmmunition = -75.0f;
-
-    private readonly float _collisionDamage = 100.0f;
 
     private float _delay = 2.0f;
     private float _nextLaunchTime = 2.0f;
@@ -25,7 +24,6 @@ public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove, IExecute
 
     private Bullet _bullet;
     private SpaceshipModel _spaceship;
-    private SpaceshipHealth _health;
 
     public System.Action<SpaceshipEnemy> OnDieChange;
 
@@ -35,27 +33,27 @@ public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove, IExecute
         Move();
     }
 
+    public float CollisionDamage
+    {
+        get { return _collisionDamage; }
+        set { _collisionDamage = value; }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         _bullet = other.gameObject.GetComponent<Bullet>();
-        _spaceship = other.gameObject.GetComponent<SpaceshipModel>();
-        _health = other.gameObject.GetComponent<SpaceshipHealth>();
 
-        if (_bullet || _spaceship)
+        if (_bullet)
         {
-            prefab = PoolManager.GetObject(_explosionShip,
-                this.gameObject.transform.position, Quaternion.identity);
+            _bullet.GetComponent<PoolObject>().ReturnToPool();
+            prefab = PoolManager.GetObject
+                (_explosionShip, this.gameObject.transform.position, Quaternion.identity);
             //explosion return to pool
             StartCoroutine(ReturnToPool(prefab));
             this.gameObject.GetComponent<PoolObject>().ReturnToPool();
+            OnDieChange?.Invoke(this);
+
             ScoreUI.instance.Score += 10;
-            OnDieChange.Invoke(this);
-            if (_bullet) _bullet.GetComponent<PoolObject>().ReturnToPool();
-            else
-            {
-                _health.CurrentHealth -= _collisionDamage;
-                _spaceship.GetComponent<PoolObject>().ReturnToPool();
-            }
         }
         else
         {

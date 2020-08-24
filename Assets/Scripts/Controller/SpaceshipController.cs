@@ -33,7 +33,7 @@ namespace Assets.Scripts.Controller
                 uiInterface.SpaceshipHealthBarUi.Fill = _health.FillHealth;
                 uiInterface.SpaceshipHealthTextUi.Text = _health.PercentHealth;
 
-                if (_health.CurrentHealth < _health.AverageHealt)
+                if (_health.CurrentHealth < _health.AverageHealth)
                 {
                     uiInterface.SpaceshipHealthBarUi.SetColor(Color.red);
                 }

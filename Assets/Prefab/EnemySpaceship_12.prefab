@@ -93,7 +93,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 6.9080963, y: 3, z: 10}
+  m_Size: {x: 7, y: 3, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &140320728297810687
 MonoBehaviour:
@@ -107,8 +107,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9a909c5676393b48a60ff0160918620, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 10
+  Rigidbody: {fileID: 0}
+  Transform: {fileID: 0}
   _gun: {fileID: 140320726465578420}
+  _collisionDamage: 50
 --- !u!114 &-1990497747402209545
 MonoBehaviour:
   m_ObjectHideFlags: 0

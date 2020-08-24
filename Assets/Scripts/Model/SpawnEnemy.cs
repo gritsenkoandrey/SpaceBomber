@@ -25,7 +25,7 @@ public sealed class SpawnEnemy : BaseObjectScene
     private float _difficulty;
 
     private GameObject _enemie;
-
+    private SpaceshipEnemy _en;
 
     protected override void Awake()
     {
