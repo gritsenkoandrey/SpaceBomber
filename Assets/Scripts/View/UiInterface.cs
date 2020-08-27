@@ -6,8 +6,12 @@ namespace Assets.Scripts.View
     public sealed class UiInterface
     {
         private ScoreUI _scoreUI;
+
         private SpaceshipHealthBarUi _spaceshipHealthBarUi;
         private SpaceshipHealthTextUi _spaceshipHealthTextUi;
+
+        private SpaceshipShieldBarUi _spaceshipShieldBarUi;
+        private SpaceshipShieldTextUi _spaceshipShieldTextUi;
 
         public ScoreUI ScoreUI
         {
@@ -42,6 +46,30 @@ namespace Assets.Scripts.View
                     _spaceshipHealthTextUi = Object.FindObjectOfType<SpaceshipHealthTextUi>();
                 }
                 return _spaceshipHealthTextUi;
+            }
+        }
+
+        public SpaceshipShieldBarUi SpaceshipShieldBarUi
+        {
+            get
+            {
+                if (!_spaceshipShieldBarUi)
+                {
+                    _spaceshipShieldBarUi = Object.FindObjectOfType<SpaceshipShieldBarUi>();
+                }
+                return _spaceshipShieldBarUi;
+            }
+        }
+
+        public SpaceshipShieldTextUi SpaceshipShieldTextUi
+        {
+            get
+            {
+                if (!_spaceshipShieldTextUi)
+                {
+                    _spaceshipShieldTextUi = Object.FindObjectOfType<SpaceshipShieldTextUi>();
+                }
+                return _spaceshipShieldTextUi;
             }
         }
     }

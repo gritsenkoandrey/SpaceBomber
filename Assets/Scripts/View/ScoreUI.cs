@@ -25,7 +25,7 @@ namespace Assets.Scripts
             instance = this;
         }
 
-        private void Update()
+        public void ShowScore()
         {
             _scoreText.text = $"Score: {_score}";
         }

@@ -9,7 +9,7 @@ public sealed class Bullet : Ammunition
     public int Damage
     {
         get { return _damage; }
-        set { _damage = value; }
+        private set { _damage = value; }
     }
 
     //public void AddForce(Vector3 direction)

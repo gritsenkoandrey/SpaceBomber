@@ -6,10 +6,10 @@ public sealed class SpaceshipMove : SpaceshipModel, IMove
 {
     [SerializeField] private float _speed = 30.0f;
 
-    private float _xMin = -35.0f;
-    private float _xMax = 35.0f;
+    private float _xMin = -40.0f;
+    private float _xMax = 40.0f;
     private float _zMin = -60.0f;
-    private float _zMax = 35.0f;
+    private float _zMax = 40.0f;
 
     private float _clampPosX;
     private float _clampPosZ;

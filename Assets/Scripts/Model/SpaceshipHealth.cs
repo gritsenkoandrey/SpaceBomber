@@ -5,7 +5,7 @@ using UnityEngine;
 
 public sealed class SpaceshipHealth : SpaceshipModel
 {
-    [SerializeField] private readonly float _maxHealth = 100.0f;
+    [SerializeField] private float _maxHealth = 100.0f;
     private float _currentHealth;
     private readonly float _minHealth = 0;
     private readonly float _quarter = 0.25f;
@@ -21,7 +21,7 @@ public sealed class SpaceshipHealth : SpaceshipModel
     public float CurrentHealth
     {
         get { return _currentHealth; }
-        set { _currentHealth = value; }
+        private set { _currentHealth = value; }
     }
 
     public float FillHealth
@@ -75,6 +75,7 @@ public sealed class SpaceshipHealth : SpaceshipModel
                     (_explosionShip, _enemyShip.transform.position, Quaternion.identity);
                 StartCoroutine(ReturnToPool(prefab));
                 _enemyShip.GetComponent<PoolObject>().ReturnToPool();
+                EnemyManager.RemoveEnemieToList(_enemyShip);
             }
             else if (_asteroid)
             {
@@ -85,7 +86,7 @@ public sealed class SpaceshipHealth : SpaceshipModel
                 _asteroid.GetComponent<PoolObject>().ReturnToPool();
             }
 
-            if (_currentHealth <= 0)
+            if (_currentHealth <= _minHealth)
             {
                 prefab = PoolManager.GetObject
                     (_explosionShip, this.gameObject.transform.position, Quaternion.identity);

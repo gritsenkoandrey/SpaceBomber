@@ -25,7 +25,6 @@ public sealed class SpawnEnemy : BaseObjectScene
     private float _difficulty;
 
     private GameObject _enemie;
-    private SpaceshipEnemy _en;
 
     protected override void Awake()
     {
@@ -54,7 +53,11 @@ public sealed class SpawnEnemy : BaseObjectScene
 
             _enemie = PoolManager.GetObject(_enemyShips[Random.Range(0, _enemyShips.Length)],
                 new Vector3(_posX, _posY, _posZ), Quaternion.identity);
-            EnemyManager.AddEnemieToList(_enemie.GetComponent<SpaceshipEnemy>());
+            //todo разобраться почему иногда прилетает null
+            if (_enemie)
+            {
+                EnemyManager.AddEnemieToList(_enemie.GetComponent<SpaceshipEnemy>());
+            }
             _nextSpaceshipEnemy = Time.time + Random.Range(_minDelay, _maxDelay);
         }
     }

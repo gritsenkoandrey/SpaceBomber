@@ -2,12 +2,13 @@
 using Assets.Scripts.Interface;
 using Assets.Scripts.Model;
 using Assets.Scripts.PoolObject;
+using System;
 using UnityEngine;
 
 
 public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove, IExecute
 {
-    [SerializeField] private readonly float _speed = 10.0f;
+    [SerializeField] private float _speed = 10.0f;
     [SerializeField] private Transform _gun;
     [SerializeField] private float _collisionDamage = 50.0f;
 
@@ -15,17 +16,17 @@ public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove, IExecute
     private readonly string _explosionShip = "ShipExplosion";
     private readonly float _forceAmmunition = -75.0f;
 
-    private float _delay = 2.0f;
+    private readonly float _delay = 2.0f;
     private float _nextLaunchTime = 2.0f;
 
-    private float _rayDistance = 100.0f;
+    private readonly float _rayDistance = 100.0f;
     private Ray _ray;
     private RaycastHit _hit;
 
     private Bullet _bullet;
     private SpaceshipModel _spaceship;
 
-    public System.Action<SpaceshipEnemy> OnDieChange;
+    public event Action<SpaceshipEnemy> OnDieChange;
 
     protected override void Awake()
     {
@@ -36,7 +37,7 @@ public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove, IExecute
     public float CollisionDamage
     {
         get { return _collisionDamage; }
-        set { _collisionDamage = value; }
+        private set { _collisionDamage = value; }
     }
 
     private void OnTriggerEnter(Collider other)

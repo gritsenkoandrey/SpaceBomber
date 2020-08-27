@@ -16,8 +16,9 @@ namespace Assets.Scripts.Controller
             _move = Object.FindObjectOfType<SpaceshipMove>();
             _health = Object.FindObjectOfType<SpaceshipHealth>();
 
-            uiInterface.SpaceshipHealthBarUi.SetActive(true);
-            uiInterface.SpaceshipHealthTextUi.SetActive(true);
+            //todo разобраться почему не работает SetActive
+            //uiInterface.SpaceshipHealthBarUi.SetActive(true);
+            //uiInterface.SpaceshipHealthTextUi.SetActive(true);
             uiInterface.SpaceshipHealthBarUi.SetColor(Color.green);
         }
 
