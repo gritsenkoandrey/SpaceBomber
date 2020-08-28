@@ -12,14 +12,14 @@ public sealed class SpawnEnemy : BaseObjectScene
         "EnemySpaceship_7", "EnemySpaceship_8", "EnemySpaceship_9", "EnemySpaceship_10",
         "EnemySpaceship_11", "EnemySpaceship_12", "EnemySpaceship_13" };
 
-    private float _minDelay = 1.0f;
-    private float _maxDelay = 4.0f;
+    private readonly float _minDelay = 1.0f;
+    private readonly float _maxDelay = 4.0f;
 
     private float _nextAsteroid = 2.0f;
     private float _nextSpaceshipEnemy = 1.0f;
 
     private float _posX;
-    private float _posY = 0;
+    private readonly float _posY = 0;
     private float _posZ;
 
     private float _difficulty;
@@ -54,7 +54,7 @@ public sealed class SpawnEnemy : BaseObjectScene
             _enemie = PoolManager.GetObject(_enemyShips[Random.Range(0, _enemyShips.Length)],
                 new Vector3(_posX, _posY, _posZ), Quaternion.identity);
             //todo разобраться почему иногда прилетает null
-            if (_enemie)
+            if (_enemie != null)
             {
                 EnemyManager.AddEnemieToList(_enemie.GetComponent<SpaceshipEnemy>());
             }

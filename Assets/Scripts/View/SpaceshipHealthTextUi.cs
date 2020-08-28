@@ -18,5 +18,10 @@ namespace Assets.Scripts.View
             base.Awake();
             _text = GetComponent<Text>();
         }
+
+        public new void SetActive(bool value)
+        {
+            _text.gameObject.SetActive(value);
+        }
     }
 }

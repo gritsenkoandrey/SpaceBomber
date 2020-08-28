@@ -11,12 +11,16 @@ public sealed class SpaceshipHealth : SpaceshipModel
     private readonly float _quarter = 0.25f;
     private readonly float _maxPercent = 100.0f;
 
+    private float _tempValue;
+    private readonly float _minShield = 0;
+
     private readonly string _explosionShip = "ShipExplosion";
     private readonly string _explosionAsteroid = "AsteroidExplosion";
 
     private Bullet _bullet;
     private SpaceshipEnemy _enemyShip;
     private AsteroidModel _asteroid;
+    private SpaceshipShield _shield;
 
     public float CurrentHealth
     {
@@ -53,6 +57,7 @@ public sealed class SpaceshipHealth : SpaceshipModel
     {
         base.Awake();
         _currentHealth = _maxHealth;
+        _shield = GetComponent<SpaceshipShield>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -65,12 +70,12 @@ public sealed class SpaceshipHealth : SpaceshipModel
         {
             if (_bullet)
             {
-                CurrentHealth -= _bullet.Damage;
+                DamageTaken(_bullet.Damage);
                 _bullet.GetComponent<PoolObject>().ReturnToPool();
             }
             else if (_enemyShip)
             {
-                CurrentHealth -= _enemyShip.CollisionDamage;
+                DamageTaken(_enemyShip.CollisionDamage);
                 prefab = PoolManager.GetObject
                     (_explosionShip, _enemyShip.transform.position, Quaternion.identity);
                 StartCoroutine(ReturnToPool(prefab));
@@ -79,7 +84,7 @@ public sealed class SpaceshipHealth : SpaceshipModel
             }
             else if (_asteroid)
             {
-                CurrentHealth -= _asteroid.CollisionDamage;
+                DamageTaken(_asteroid.CollisionDamage);
                 prefab = PoolManager.GetObject
                     (_explosionAsteroid, this.gameObject.transform.position, Quaternion.identity);
                 StartCoroutine(ReturnToPool(prefab));
@@ -94,6 +99,20 @@ public sealed class SpaceshipHealth : SpaceshipModel
                 StartCoroutine(ReturnToPool(prefab));
                 this.gameObject.GetComponent<PoolObject>().ReturnToPool();
             }
+        }
+    }
+
+    private void DamageTaken(float damage)
+    {
+        if (_shield.CurrentShield >= damage)
+        {
+            _shield.CurrentShield -= damage;
+        }
+        else
+        {
+            _tempValue = damage - _shield.CurrentShield;
+            _shield.CurrentShield = _minShield;
+            CurrentHealth -= _tempValue;
         }
     }
 }

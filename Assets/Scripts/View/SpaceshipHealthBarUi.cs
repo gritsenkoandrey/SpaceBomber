@@ -24,5 +24,10 @@ namespace Assets.Scripts.View
         {
             _bar.color = color;
         }
+
+        public new void SetActive(bool value)
+        {
+            _bar.gameObject.SetActive(value);
+        }
     }
 }

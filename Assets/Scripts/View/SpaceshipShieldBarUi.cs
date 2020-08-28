@@ -20,6 +20,11 @@ namespace Assets.Scripts.View
             _bar = GetComponent<Image>();
         }
 
+        public new void SetActive(bool value)
+        {
+            _bar.gameObject.SetActive(value);
+        }
+
         public void SetColor(Color color)
         {
             _bar.color = color;

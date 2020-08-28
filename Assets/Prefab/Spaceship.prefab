@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1007134262583272144}
   - component: {fileID: 1007134262583272145}
   - component: {fileID: 1759025367314451686}
+  - component: {fileID: 8984345951905234090}
   - component: {fileID: -2452673929559739799}
   m_Layer: 0
   m_Name: Spaceship
@@ -84,6 +85,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5978245f216cff342abdb0c39746f1c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Rigidbody: {fileID: 0}
+  Transform: {fileID: 0}
   _gunOne: {fileID: 1007134263416319158}
   _gunTwo: {fileID: 1007134263244462570}
   _gunThree: {fileID: 1007134264283622488}
@@ -100,7 +103,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3402a976bf1cd7c42ad70c9e27393e0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 100
+  Rigidbody: {fileID: 0}
+  Transform: {fileID: 0}
+  _maxHealth: 100
 --- !u!114 &1759025367314451686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,7 +118,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde137100ffcf364ca6721c7ea7cf352, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Rigidbody: {fileID: 0}
+  Transform: {fileID: 0}
   _speed: 30
+--- !u!114 &8984345951905234090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007134262583271978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10698dea22fa8954bbc607d5a48e3db4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Rigidbody: {fileID: 0}
+  Transform: {fileID: 0}
+  _currentShield: 50
 --- !u!114 &-2452673929559739799
 MonoBehaviour:
   m_ObjectHideFlags: 0
