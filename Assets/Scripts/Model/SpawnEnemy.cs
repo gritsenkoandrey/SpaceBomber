@@ -21,8 +21,10 @@ public sealed class SpawnEnemy : BaseObjectScene
     private float _posX;
     private readonly float _posY = 0;
     private float _posZ;
+    private readonly float _half = 0.5f;
 
     private float _difficulty;
+    private readonly float _addDifficulty = 0.15f;
 
     private GameObject _enemie;
 
@@ -37,7 +39,7 @@ public sealed class SpawnEnemy : BaseObjectScene
         if (Time.time > _nextAsteroid)
         {
             _posX = RandomPosX();
-            _difficulty += 0.15f;
+            _difficulty += _addDifficulty;
 
             PoolManager.GetObject(_asteroids[Random.Range(0, _asteroids.Length)],
                 new Vector3(_posX, _posY, _posZ), Quaternion.identity);
@@ -64,6 +66,6 @@ public sealed class SpawnEnemy : BaseObjectScene
 
     private float RandomPosX()
     {
-        return Random.Range(-transform.localScale.x / 2, transform.localScale.x / 2);
+        return Random.Range(-transform.localScale.x * _half, transform.localScale.x * _half);
     }
 }

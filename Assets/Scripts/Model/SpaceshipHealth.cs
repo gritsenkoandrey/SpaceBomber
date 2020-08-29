@@ -12,7 +12,7 @@ public sealed class SpaceshipHealth : SpaceshipModel
     private readonly float _maxPercent = 100.0f;
 
     private float _tempValue;
-    private readonly float _minShield = 0;
+    private readonly float _shieldDestroyed = 0;
 
     private readonly string _explosionShip = "ShipExplosion";
     private readonly string _explosionAsteroid = "AsteroidExplosion";
@@ -102,6 +102,10 @@ public sealed class SpaceshipHealth : SpaceshipModel
         }
     }
 
+    /// <summary>
+    /// Обработка полученного урона с учетом SpaceshipShield
+    /// </summary>
+    /// <param name="damage">Полученный урон</param>
     private void DamageTaken(float damage)
     {
         if (_shield.CurrentShield >= damage)
@@ -111,7 +115,7 @@ public sealed class SpaceshipHealth : SpaceshipModel
         else
         {
             _tempValue = damage - _shield.CurrentShield;
-            _shield.CurrentShield = _minShield;
+            _shield.CurrentShield = _shieldDestroyed;
             CurrentHealth -= _tempValue;
         }
     }

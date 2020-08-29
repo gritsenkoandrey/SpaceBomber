@@ -21,7 +21,7 @@ namespace Assets.Scripts
         {
             base.Awake();
             _scoreText = GetComponent<Text>();
-            _scoreText.color = Color.green;
+            _scoreText.color = Color.yellow;
             instance = this;
         }
 

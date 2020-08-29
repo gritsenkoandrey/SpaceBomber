@@ -23,7 +23,7 @@ public sealed class AsteroidModel : BaseObjectScene, IMove
     public float CollisionDamage
     {
         get { return _collisionDamage; }
-        set { _collisionDamage = value; }
+        private set { _collisionDamage = value; }
     }
 
     protected override void Awake()
