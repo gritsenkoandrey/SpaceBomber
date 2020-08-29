@@ -7,7 +7,7 @@ using UnityEngine;
 
 public sealed class AsteroidModel : BaseObjectScene, IMove
 {
-    [SerializeField] private float _collisionDamage = 20.0f;
+    [SerializeField] private int _collisionDamage = 20;
 
     private float _rotation;
     private readonly float _minRotation = 5.0f;
@@ -20,7 +20,7 @@ public sealed class AsteroidModel : BaseObjectScene, IMove
 
     private Bullet _bullet;
 
-    public float CollisionDamage
+    public int CollisionDamage
     {
         get { return _collisionDamage; }
         private set { _collisionDamage = value; }

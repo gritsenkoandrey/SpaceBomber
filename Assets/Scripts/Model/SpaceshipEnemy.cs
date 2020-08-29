@@ -12,7 +12,7 @@ public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove, IExecute
     private readonly float _minSpeed = 20.0f;
     private readonly float _maxSpeed = 50.0f;
     [SerializeField] private Transform _gun;
-    [SerializeField] private float _collisionDamage = 50.0f;
+    [SerializeField] private int _collisionDamage = 50;
 
     private readonly string _bulletYellow = "BulletYellow";
     private readonly string _explosionShip = "ShipExplosion";
@@ -36,7 +36,7 @@ public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove, IExecute
         Move();
     }
 
-    public float CollisionDamage
+    public int CollisionDamage
     {
         get { return _collisionDamage; }
         private set { _collisionDamage = value; }

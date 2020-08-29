@@ -4,9 +4,9 @@ using UnityEngine;
 
 public sealed class Bullet : Ammunition
 {
-    [SerializeField] private float _damage = 10.0f;
+    [SerializeField] private int _damage = 10;
 
-    public float Damage
+    public int Damage
     {
         get { return _damage; }
         private set { _damage = value; }

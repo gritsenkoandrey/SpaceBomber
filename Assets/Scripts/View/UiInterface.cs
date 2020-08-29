@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.UI;
+using UnityEngine;
 
 
 namespace Assets.Scripts.View
@@ -12,6 +13,8 @@ namespace Assets.Scripts.View
 
         private SpaceshipShieldBarUi _spaceshipShieldBarUi;
         private SpaceshipShieldTextUi _spaceshipShieldTextUi;
+
+        private GamePauseUi _gamePauseUi;
 
         public ScoreUI ScoreUI
         {
@@ -70,6 +73,18 @@ namespace Assets.Scripts.View
                     _spaceshipShieldTextUi = Object.FindObjectOfType<SpaceshipShieldTextUi>();
                 }
                 return _spaceshipShieldTextUi;
+            }
+        }
+
+        public GamePauseUi GamePauseUi
+        {
+            get
+            {
+                if (!_gamePauseUi)
+                {
+                    _gamePauseUi = Object.FindObjectOfType<GamePauseUi>();
+                }
+                return _gamePauseUi;
             }
         }
     }

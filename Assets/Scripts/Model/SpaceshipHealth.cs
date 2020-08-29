@@ -7,12 +7,12 @@ public sealed class SpaceshipHealth : SpaceshipModel
 {
     [SerializeField] private float _maxHealth = 100.0f;
     private float _currentHealth;
-    private readonly float _minHealth = 0;
+    private readonly byte _minHealth = 0;
     private readonly float _quarter = 0.25f;
-    private readonly float _maxPercent = 100.0f;
+    private readonly int _maxPercent = 100;
 
     private float _tempValue;
-    private readonly float _shieldDestroyed = 0;
+    private readonly byte _shieldDestroyed = 0;
 
     private readonly string _explosionShip = "ShipExplosion";
     private readonly string _explosionAsteroid = "AsteroidExplosion";
@@ -106,7 +106,7 @@ public sealed class SpaceshipHealth : SpaceshipModel
     /// Обработка полученного урона с учетом SpaceshipShield
     /// </summary>
     /// <param name="damage">Полученный урон</param>
-    private void DamageTaken(float damage)
+    private void DamageTaken(int damage)
     {
         if (_shield.CurrentShield >= damage)
         {

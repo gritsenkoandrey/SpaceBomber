@@ -1,6 +1,6 @@
 ﻿using Assets.Scripts.Interface;
 using Assets.Scripts.ServiceLocators;
-using UnityEngine.SocialPlatforms.Impl;
+
 
 namespace Assets.Scripts.Controller
 {
@@ -26,13 +26,13 @@ namespace Assets.Scripts.Controller
             ServiceLocator.SetService(new InputController());
             ServiceLocator.SetService(new SpaceshipController());
             ServiceLocator.SetService(new EnemyController());
-            ServiceLocator.SetService(new ScoreController());
+            ServiceLocator.SetService(new GameplayController());
 
             _executeControllers = new IExecute[4];
             _executeControllers[0] = ServiceLocator.Resolve<InputController>();
             _executeControllers[1] = ServiceLocator.Resolve<SpaceshipController>();
             _executeControllers[2] = ServiceLocator.Resolve<EnemyController>();
-            _executeControllers[3] = ServiceLocator.Resolve<ScoreController>();
+            _executeControllers[3] = ServiceLocator.Resolve<GameplayController>();
         }
 
         public void Initialization()
@@ -48,6 +48,7 @@ namespace Assets.Scripts.Controller
             ServiceLocator.Resolve<InputController>().On();
             ServiceLocator.Resolve<SpaceshipController>().On();
             ServiceLocator.Resolve<EnemyController>().On();
+            ServiceLocator.Resolve<GameplayController>().On();
         }
 
         public void Cleanup()

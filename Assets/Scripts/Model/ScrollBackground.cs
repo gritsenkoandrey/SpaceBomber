@@ -16,12 +16,6 @@ public sealed class ScrollBackground : BaseObjectScene, IMove
         _startPos = transform.position;
     }
 
-    //todo обрабатывать FixedUpdate через контроллер
-    private void FixedUpdate()
-    {
-        Move();
-    }
-
     public void Move()
     {
         _move = Mathf.Repeat(Time.time * _speed, _backgroundSize);

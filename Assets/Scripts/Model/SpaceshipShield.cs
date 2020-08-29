@@ -7,8 +7,8 @@ namespace Assets.Scripts.Model
     {
         [SerializeField] private float _maxShield = 100.0f;
         private float _currentShield;
-        private readonly float _minShield = 0;
-        private readonly float _maxPercent = 100.0f;
+        private readonly byte _minShield = 0;
+        private readonly int _maxPercent = 100;
 
         public float CurrentShield
         {

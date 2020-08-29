@@ -9,7 +9,7 @@ namespace Assets.Scripts.Controller
     {
         private readonly int _leftButton = (int)MouseButton.LeftButton;
         private readonly int _rightButton = (int)MouseButton.RightButton;
-
+        private readonly KeyCode _escape = KeyCode.Escape;
 
         public InputController()
         {
@@ -37,6 +37,14 @@ namespace Assets.Scripts.Controller
                 if (ServiceLocator.Resolve<SpaceshipController>().IsActive)
                 {
                     ServiceLocator.Resolve<SpaceshipController>().FireSecondWeapon();
+                }
+            }
+
+            if (Input.GetKeyDown(_escape))
+            {
+                if (ServiceLocator.Resolve<SpaceshipController>().IsActive)
+                {
+                    ServiceLocator.Resolve<GameplayController>().Pause();
                 }
             }
         }
