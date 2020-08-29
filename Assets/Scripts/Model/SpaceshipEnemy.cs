@@ -4,11 +4,13 @@ using Assets.Scripts.Model;
 using Assets.Scripts.PoolObject;
 using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 
 public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove, IExecute
 {
-    [SerializeField] private float _speed = 10.0f;
+    private readonly float _minSpeed = 20.0f;
+    private readonly float _maxSpeed = 50.0f;
     [SerializeField] private Transform _gun;
     [SerializeField] private float _collisionDamage = 50.0f;
 
@@ -86,6 +88,6 @@ public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove, IExecute
     public void Move()
     {
         Rigidbody = GetComponent<Rigidbody>();
-        Rigidbody.velocity = -new Vector3(0, 0, _speed);
+        Rigidbody.velocity = -new Vector3(0, 0, Random.Range(_minSpeed, _maxSpeed));
     }
 }

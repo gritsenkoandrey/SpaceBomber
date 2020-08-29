@@ -10,7 +10,7 @@ namespace Assets.Scripts.View
 
         public float Text
         {
-            set { _text.text = $"{value:0}"; }
+            set { _text.text = $"Shield {value:0}%"; }
         }
 
         protected override void Awake()
