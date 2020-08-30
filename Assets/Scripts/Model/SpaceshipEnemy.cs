@@ -11,7 +11,6 @@ public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove, IExecute
 {
     private readonly float _minSpeed = 20.0f;
     private readonly float _maxSpeed = 50.0f;
-    [SerializeField] private Transform _gun;
     [SerializeField] private int _collisionDamage = 50;
 
     private readonly string _bulletYellow = "BulletYellow";
@@ -22,9 +21,11 @@ public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove, IExecute
     private float _nextLaunchTime = 2.0f;
 
     private readonly float _rayDistance = 100.0f;
+    private readonly byte _points = 10;
     private Ray _ray;
     private RaycastHit _hit;
 
+    [SerializeField] private Transform _gun;
     private Bullet _bullet;
     private SpaceshipModel _spaceship;
 
@@ -56,7 +57,7 @@ public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove, IExecute
             this.gameObject.GetComponent<PoolObject>().ReturnToPool();
             OnDieChange?.Invoke(this);
 
-            ScoreUI.instance.Score += 10;
+            ScoreUI.instance.Score += _points;
         }
         else
         {

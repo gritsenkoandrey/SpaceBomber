@@ -16,6 +16,8 @@ public sealed class AsteroidModel : BaseObjectScene, IMove
     private readonly float _minSpeed = 5.0f;
     private readonly float _maxSpeed = 25.0f;
 
+    private readonly byte _points = 5;
+
     private readonly string _explosionAsteroid = "AsteroidExplosion";
 
     private Bullet _bullet;
@@ -43,7 +45,7 @@ public sealed class AsteroidModel : BaseObjectScene, IMove
             this.gameObject.GetComponent<PoolObject>().ReturnToPool();
             _bullet.GetComponent<PoolObject>().ReturnToPool();
 
-            ScoreUI.instance.Score += 10;
+            ScoreUI.instance.Score += _points;
         }
     }
 
