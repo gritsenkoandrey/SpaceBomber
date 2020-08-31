@@ -82,15 +82,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1007134262583271978}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5978245f216cff342abdb0c39746f1c0, type: 3}
+  m_Script: {fileID: 11500000, guid: 8cecddae76ed4604cb6a6c900f7180d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Rigidbody: {fileID: 0}
   Transform: {fileID: 0}
-  _gunOne: {fileID: 1007134263416319158}
-  _gunTwo: {fileID: 1007134263244462570}
-  _gunThree: {fileID: 1007134264283622488}
-  _gunFour: {fileID: 1007134262703243587}
+  _speed: 30
 --- !u!114 &1007134262583272145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,12 +97,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1007134262583271978}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3402a976bf1cd7c42ad70c9e27393e0d, type: 3}
+  m_Script: {fileID: 11500000, guid: ab163d7e0360b444db93deddaab73e5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Rigidbody: {fileID: 0}
   Transform: {fileID: 0}
-  _maxHealth: 100
+  _maxShield: 100
 --- !u!114 &1759025367314451686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,12 +112,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1007134262583271978}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fde137100ffcf364ca6721c7ea7cf352, type: 3}
+  m_Script: {fileID: 11500000, guid: 77bb5929dba82124a9cf7210d8278599, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Rigidbody: {fileID: 0}
   Transform: {fileID: 0}
-  _speed: 30
+  _maxHealth: 100
 --- !u!114 &8984345951905234090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,12 +127,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1007134262583271978}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10698dea22fa8954bbc607d5a48e3db4, type: 3}
+  m_Script: {fileID: 11500000, guid: 23ec82d43b86d19489083f03c3774e11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Rigidbody: {fileID: 0}
   Transform: {fileID: 0}
-  _currentShield: 50
+  _gunOne: {fileID: 1007134263416319158}
+  _gunTwo: {fileID: 1007134263244462570}
+  _gunThree: {fileID: 1007134264283622488}
+  _gunFour: {fileID: 1007134262703243587}
 --- !u!114 &-2452673929559739799
 MonoBehaviour:
   m_ObjectHideFlags: 0

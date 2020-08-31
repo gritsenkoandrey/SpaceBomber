@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.Audio;
 using UnityEditor;
+using UnityEngine.SceneManagement;
+using Assets.Scripts.Model;
+using Assets.Scripts.ServiceLocators;
 
 
 namespace Assets.Scripts.UI
@@ -10,12 +13,13 @@ namespace Assets.Scripts.UI
         private bool _isPaused = false;
         private readonly byte _timeOn = 1;
         private readonly byte _timeOff = 0;
+        private readonly byte _gameScene = 0;
         private readonly string _pausedSnapshot = "Paused";
         private readonly string _unPausedSnapshot = "UnPaused";
         private readonly float _timeToReach = 0.0001f;
 
         [SerializeField] private ButtonUi _resume;
-        [SerializeField] private ButtonUi _mainMenu;
+        [SerializeField] private ButtonUi _restart;
         [SerializeField] private ButtonUi _quit;
 
         [SerializeField] private AudioMixer _mixer;
@@ -29,13 +33,16 @@ namespace Assets.Scripts.UI
 
         private SpaceshipFire _ship;
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+
             _pause = _mixer.FindSnapshot(_pausedSnapshot);
             _unPause = _mixer.FindSnapshot(_unPausedSnapshot);
             _ship = Object.FindObjectOfType<SpaceshipFire>();
 
             _resume.GetButton.onClick.AddListener(delegate { Pause(); });
+            _restart.GetButton.onClick.AddListener(delegate { RestartGame(); });
             _quit.GetButton.onClick.AddListener(delegate { QuitGame(); });
         }
 
@@ -79,6 +86,16 @@ namespace Assets.Scripts.UI
         {
             _gamePanel.SetActive(true);
             _pausePanel.SetActive(false);
+        }
+
+        private void RestartGame()
+        {
+            Time.timeScale = _timeOn;
+            _unPause.TransitionTo(_timeToReach);
+            EnemyManager.Cleanup();
+            ServiceLocator.Cleanup();
+            ServiceLocatorMonoBehaviour.Cleanup();
+            SceneManager.LoadScene(_gameScene);
         }
     }
 }

@@ -41,5 +41,10 @@ namespace Assets.Scripts.Model
                 _enemiesList[i].Execute();
             }
         }
+
+        public static void Cleanup()
+        {
+            _enemiesList.Clear();
+        }
     }
 }
