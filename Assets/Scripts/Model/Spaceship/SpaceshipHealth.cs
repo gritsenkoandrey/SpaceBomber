@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Model;
+﻿using Assets.Scripts.Manager;
+using Assets.Scripts.Model;
 using Assets.Scripts.PoolObject;
 using UnityEngine;
 
@@ -81,6 +82,7 @@ public sealed class SpaceshipHealth : SpaceshipModel
                 StartCoroutine(ReturnToPool(prefab));
                 _enemyShip.GetComponent<PoolObject>().ReturnToPool();
                 EnemyManager.RemoveEnemieToList(_enemyShip);
+                AudioManager.Instance.PlaySound("Grenade6Short");
             }
             else if (_asteroid)
             {
@@ -89,6 +91,7 @@ public sealed class SpaceshipHealth : SpaceshipModel
                     (_explosionAsteroid, this.gameObject.transform.position, Quaternion.identity);
                 StartCoroutine(ReturnToPool(prefab));
                 _asteroid.GetComponent<PoolObject>().ReturnToPool();
+                AudioManager.Instance.PlaySound("Grenade3Short");
             }
 
             if (_currentHealth <= _minHealth)
@@ -98,6 +101,7 @@ public sealed class SpaceshipHealth : SpaceshipModel
                 //explosion add to pool object
                 StartCoroutine(ReturnToPool(prefab));
                 this.gameObject.GetComponent<PoolObject>().ReturnToPool();
+                AudioManager.Instance.PlaySound("Grenade6Short");
             }
         }
     }

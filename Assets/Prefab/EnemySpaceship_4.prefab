@@ -38207,8 +38207,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Rigidbody: {fileID: 0}
   Transform: {fileID: 0}
-  _gun: {fileID: 2924471376882098945}
   _collisionDamage: 50
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 8192
+  _gun: {fileID: 2924471376882098945}
 --- !u!114 &-5046823484236619212
 MonoBehaviour:
   m_ObjectHideFlags: 0

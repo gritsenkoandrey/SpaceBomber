@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.PoolObject;
+﻿using Assets.Scripts.Manager;
+using Assets.Scripts.PoolObject;
 using UnityEngine;
 
 
@@ -33,9 +34,11 @@ public sealed class SpaceshipFire : SpaceshipModel
             {
                 prefab = PoolManager.GetObject(_bulletBlue, _gunOne.position, Quaternion.identity);
                 prefab.GetComponent<Bullet>().Velocity(_forceAmmunition);
+                AudioManager.Instance.PlaySound("Laser20");
 
                 prefab = PoolManager.GetObject(_bulletBlue, _gunTwo.position, Quaternion.identity);
                 prefab.GetComponent<Bullet>().Velocity(_forceAmmunition);
+                AudioManager.Instance.PlaySound("Laser20");
 
                 _nextLaunchTime = Time.time + _delay;
             }
@@ -50,9 +53,11 @@ public sealed class SpaceshipFire : SpaceshipModel
             {
                 prefab = PoolManager.GetObject(_bulletYellow, _gunThree.position, Quaternion.identity);
                 prefab.GetComponent<Bullet>().Velocity(_forceAmmunition);
+                AudioManager.Instance.PlaySound("Laser15");
 
                 prefab = PoolManager.GetObject(_bulletYellow, _gunFour.position, Quaternion.identity);
                 prefab.GetComponent<Bullet>().Velocity(_forceAmmunition);
+                AudioManager.Instance.PlaySound("Laser15");
 
                 _nextLaunchTime = Time.time + _delay;
             }

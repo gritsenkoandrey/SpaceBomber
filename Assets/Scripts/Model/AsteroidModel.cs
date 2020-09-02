@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts;
 using Assets.Scripts.Interface;
+using Assets.Scripts.Manager;
 using Assets.Scripts.Model;
 using Assets.Scripts.PoolObject;
 using UnityEngine;
@@ -44,7 +45,7 @@ public sealed class AsteroidModel : BaseObjectScene, IMove
             StartCoroutine(ReturnToPool(prefab));
             this.gameObject.GetComponent<PoolObject>().ReturnToPool();
             _bullet.GetComponent<PoolObject>().ReturnToPool();
-
+            AudioManager.Instance.PlaySound("Grenade3Short");
             ScoreUI.instance.Score += _points;
         }
     }

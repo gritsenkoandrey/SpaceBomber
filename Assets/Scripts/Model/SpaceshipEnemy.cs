@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts;
 using Assets.Scripts.Interface;
+using Assets.Scripts.Manager;
 using Assets.Scripts.Model;
 using Assets.Scripts.PoolObject;
 using System;
@@ -20,10 +21,12 @@ public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove, IExecute
     private readonly float _delay = 2.0f;
     private float _nextLaunchTime = 2.0f;
 
-    private readonly float _rayDistance = 100.0f;
     private readonly byte _points = 10;
+
+    private readonly float _rayDistance = 100.0f;
     private Ray _ray;
     private RaycastHit _hit;
+    [SerializeField] private LayerMask _layerMask;
 
     [SerializeField] private Transform _gun;
     private Bullet _bullet;
@@ -55,6 +58,7 @@ public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove, IExecute
             //explosion return to pool
             StartCoroutine(ReturnToPool(prefab));
             this.gameObject.GetComponent<PoolObject>().ReturnToPool();
+            AudioManager.Instance.PlaySound("Grenade6Short");
             OnDieChange?.Invoke(this);
 
             ScoreUI.instance.Score += _points;
@@ -73,7 +77,7 @@ public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove, IExecute
     public void Fire()
     {
         _ray = new Ray(_gun.position, -_gun.forward);
-        if (Physics.Raycast(_ray, out _hit, _rayDistance))
+        if (Physics.Raycast(_ray, out _hit, _rayDistance, _layerMask))
         {
             _spaceship = _hit.collider.gameObject.GetComponent<SpaceshipModel>();
 
@@ -81,6 +85,7 @@ public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove, IExecute
             {
                 prefab = PoolManager.GetObject(_bulletYellow, _gun.position, Quaternion.identity);
                 prefab.GetComponent<Bullet>().Velocity(_forceAmmunition);
+                AudioManager.Instance.PlaySound("Laser19");
                 _nextLaunchTime = Time.time + _delay;
             }
         }
