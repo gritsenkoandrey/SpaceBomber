@@ -8,8 +8,8 @@ public sealed class SpaceshipMove : SpaceshipModel, IMove
 
     private float _xMin = -40.0f;
     private float _xMax = 40.0f;
-    private float _zMin = -55.0f;
-    private float _zMax = 40.0f;
+    private float _zMin = -50.0f;
+    private float _zMax = 60.0f;
 
     private float _clampPosX;
     private float _clampPosZ;

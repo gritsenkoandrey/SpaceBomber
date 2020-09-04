@@ -1,36 +1,31 @@
-﻿using Assets.Scripts.Singleton;
+﻿using Assets.Scripts.Model;
 using UnityEngine;
 
 
 namespace Assets.Scripts.Manager
 {
     //todo доработать класс через пулобъектов
-    public sealed class AudioManager /*: SingletonAsComponent<AudioManager>*/ : MonoBehaviour
+    public sealed class AudioManager : BaseObjectScene
     {
-        [SerializeField] private AudioSource _source;
-        private AudioClip _clip;
-
+        private AudioSource _source;
+        private static AudioClip _clip;
         public static AudioManager Instance;
-        //public static AudioManager Instance
-        //{
-        //    get { return ((AudioManager)instance); }
-        //    set { instance = value; }
-        //}
 
-        private void Start()
+        protected override void Awake()
         {
-            //_source = Object.FindObjectOfType<AudioSource>();
+            base.Awake();
             Instance = this;
+            _source = FindObjectOfType<AudioSource>();
         }
 
-        private void Update()
-        {
-            if (!_source.isPlaying && _clip != null)
-            {
-                Resources.UnloadAsset(_clip);
-                _clip = null;
-            }
-        }
+        //private void Update()
+        //{
+        //    if (!_source.isPlaying && _clip != null)
+        //    {
+        //        Resources.UnloadAsset(_clip);
+        //        _clip = null;
+        //    }
+        //}
 
         public void PlaySound(string resourceName)
         {
