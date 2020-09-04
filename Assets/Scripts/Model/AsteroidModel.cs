@@ -20,7 +20,7 @@ public sealed class AsteroidModel : BaseObjectScene, IMove
     private readonly byte _points = 5;
 
     private readonly string _explosionAsteroid = "AsteroidExplosion";
-
+    private readonly string _explosionAsteroidSound = "Grenade3Short";
     private Bullet _bullet;
 
     public int CollisionDamage
@@ -45,7 +45,7 @@ public sealed class AsteroidModel : BaseObjectScene, IMove
             StartCoroutine(ReturnToPool(prefab));
             this.gameObject.GetComponent<PoolObject>().ReturnToPool();
             _bullet.GetComponent<PoolObject>().ReturnToPool();
-            AudioManager.Instance.PlaySound("Grenade3Short");
+            AudioManager.Instance.PlaySound(_explosionAsteroidSound);
             ScoreUI.instance.Score += _points;
         }
     }

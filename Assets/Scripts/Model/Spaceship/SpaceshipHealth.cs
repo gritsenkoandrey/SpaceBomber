@@ -17,6 +17,8 @@ public sealed class SpaceshipHealth : SpaceshipModel
 
     private readonly string _explosionShip = "ShipExplosion";
     private readonly string _explosionAsteroid = "AsteroidExplosion";
+    private readonly string _explosionAsteroidSound = "Grenade3Short";
+    private readonly string _explosionShipSound = "Grenade6Short";
 
     private Bullet _bullet;
     private SpaceshipEnemy _enemyShip;
@@ -58,7 +60,7 @@ public sealed class SpaceshipHealth : SpaceshipModel
     {
         base.Awake();
         _currentHealth = _maxHealth;
-        _shield = GetComponent<SpaceshipShield>();
+        _shield = GetComponentInChildren<SpaceshipShield>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -82,7 +84,7 @@ public sealed class SpaceshipHealth : SpaceshipModel
                 StartCoroutine(ReturnToPool(prefab));
                 _enemyShip.GetComponent<PoolObject>().ReturnToPool();
                 EnemyManager.RemoveEnemieToList(_enemyShip);
-                AudioManager.Instance.PlaySound("Grenade6Short");
+                AudioManager.Instance.PlaySound(_explosionShipSound);
             }
             else if (_asteroid)
             {
@@ -91,7 +93,7 @@ public sealed class SpaceshipHealth : SpaceshipModel
                     (_explosionAsteroid, this.gameObject.transform.position, Quaternion.identity);
                 StartCoroutine(ReturnToPool(prefab));
                 _asteroid.GetComponent<PoolObject>().ReturnToPool();
-                AudioManager.Instance.PlaySound("Grenade3Short");
+                AudioManager.Instance.PlaySound(_explosionAsteroidSound);
             }
 
             if (_currentHealth <= _minHealth)
@@ -101,7 +103,7 @@ public sealed class SpaceshipHealth : SpaceshipModel
                 //explosion add to pool object
                 StartCoroutine(ReturnToPool(prefab));
                 this.gameObject.GetComponent<PoolObject>().ReturnToPool();
-                AudioManager.Instance.PlaySound("Grenade6Short");
+                AudioManager.Instance.PlaySound(_explosionShipSound);
             }
         }
     }
@@ -120,6 +122,7 @@ public sealed class SpaceshipHealth : SpaceshipModel
         {
             _tempValue = damage - _shield.CurrentShield;
             _shield.CurrentShield = _shieldDestroyed;
+            _shield.SetActive(false);
             CurrentHealth -= _tempValue;
         }
     }

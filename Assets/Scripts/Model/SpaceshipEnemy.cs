@@ -16,6 +16,9 @@ public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove, IExecute
 
     private readonly string _bulletYellow = "BulletYellow";
     private readonly string _explosionShip = "ShipExplosion";
+    private readonly string _explosionShipSound = "Grenade6Short";
+    private readonly string _bulletSound = "Laser19";
+
     private readonly float _forceAmmunition = -75.0f;
 
     private readonly float _delay = 2.0f;
@@ -58,7 +61,7 @@ public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove, IExecute
             //explosion return to pool
             StartCoroutine(ReturnToPool(prefab));
             this.gameObject.GetComponent<PoolObject>().ReturnToPool();
-            AudioManager.Instance.PlaySound("Grenade6Short");
+            AudioManager.Instance.PlaySound(_explosionShipSound);
             OnDieChange?.Invoke(this);
 
             ScoreUI.instance.Score += _points;
@@ -85,7 +88,7 @@ public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove, IExecute
             {
                 prefab = PoolManager.GetObject(_bulletYellow, _gun.position, Quaternion.identity);
                 prefab.GetComponent<Bullet>().Velocity(_forceAmmunition);
-                AudioManager.Instance.PlaySound("Laser19");
+                AudioManager.Instance.PlaySound(_bulletSound);
                 _nextLaunchTime = Time.time + _delay;
             }
         }
