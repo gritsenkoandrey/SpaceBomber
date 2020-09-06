@@ -26,6 +26,7 @@ namespace Assets.Scripts.Controller
             uiInterface.SpaceshipShieldBarUi.SetActive(true);
             uiInterface.SpaceshipShieldTextUi.SetActive(true);
             uiInterface.SpaceshipShieldBarUi.SetColor(Color.blue);
+            _shield.SetActive(true);
         }
 
         public void Execute()
@@ -53,6 +54,7 @@ namespace Assets.Scripts.Controller
                 {
                     uiInterface.SpaceshipShieldBarUi.SetActive(false);
                     uiInterface.SpaceshipShieldTextUi.SetActive(false);
+                    _shield.SetActive(false);
 
                     if (_health.CurrentHealth <= 0)
                     {

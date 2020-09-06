@@ -122,7 +122,6 @@ public sealed class SpaceshipHealth : SpaceshipModel
         {
             _tempValue = damage - _shield.CurrentShield;
             _shield.CurrentShield = _shieldDestroyed;
-            _shield.SetActive(false);
             CurrentHealth -= _tempValue;
         }
     }

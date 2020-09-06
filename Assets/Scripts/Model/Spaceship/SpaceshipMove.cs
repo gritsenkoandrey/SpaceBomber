@@ -4,19 +4,32 @@ using UnityEngine;
 
 public sealed class SpaceshipMove : SpaceshipModel, IMove
 {
-    [SerializeField] private float _speed = 30.0f;
+    [SerializeField] private float _normalSpeed;
+    private float _speed;
 
-    private float _xMin = -40.0f;
-    private float _xMax = 40.0f;
-    private float _zMin = -50.0f;
-    private float _zMax = 60.0f;
+    private readonly float _xMin = -40.0f;
+    private readonly float _xMax = 40.0f;
+    private readonly float _zMin = -50.0f;
+    private readonly float _zMax = 60.0f;
 
     private float _clampPosX;
     private float _clampPosZ;
 
-    private float _tilt = 25.0f;
+    private readonly float _tilt = 25.0f;
 
     private Vector2 _input;
+
+    public float CurrentSpeed
+    {
+        get { return _speed; }
+        private set { _speed = value; }
+    }
+
+    protected override void Awake()
+    {
+        base.Awake();
+        _speed = _normalSpeed;
+    }
 
     public void Move()
     {
@@ -30,5 +43,16 @@ public sealed class SpaceshipMove : SpaceshipModel, IMove
 
         // поворот корабля
         Rigidbody.rotation = Quaternion.Euler(_input.y, 0, -_input.x * _tilt);
+    }
+
+    public void PickEnergyItem(float speed, float time)
+    {
+        CurrentSpeed += speed;
+        Invoke(nameof(ReturnToNormalSpeed), time);
+    }
+
+    private void ReturnToNormalSpeed()
+    {
+        CurrentSpeed = _normalSpeed;
     }
 }
