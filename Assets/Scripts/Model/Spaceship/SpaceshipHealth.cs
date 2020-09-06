@@ -125,4 +125,16 @@ public sealed class SpaceshipHealth : SpaceshipModel
             CurrentHealth -= _tempValue;
         }
     }
+
+    /// <summary>
+    /// Получение здоровья.
+    /// </summary>
+    public void HealthTaken(float health)
+    {
+        CurrentHealth += health;
+        if (CurrentHealth > _maxHealth)
+        {
+            CurrentHealth = _maxHealth;
+        }
+    }
 }
