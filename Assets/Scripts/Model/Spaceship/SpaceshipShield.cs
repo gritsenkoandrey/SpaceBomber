@@ -12,9 +12,9 @@ namespace Assets.Scripts.Model
 
         public float CurrentShield
         {
-            get 
+            get
             {
-                if (_currentShield >= _maxShield)
+                if (_currentShield > _maxShield)
                 {
                     _currentShield = _maxShield;
                 }
@@ -47,6 +47,11 @@ namespace Assets.Scripts.Model
         {
             base.Awake();
             _currentShield = _maxShield;
+        }
+
+        public void ShieldTaken(float shield)
+        {
+            CurrentShield += shield;
         }
     }
 }

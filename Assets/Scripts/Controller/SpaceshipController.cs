@@ -48,8 +48,11 @@ namespace Assets.Scripts.Controller
                 {
                     uiInterface.SpaceshipHealthBarUi.SetColor(Color.red);
                 }
-                // todo разобраться в случае если мы сможем подбирать аптечки и щиты,
-                // как это будет отображаться
+                else
+                {
+                    uiInterface.SpaceshipHealthBarUi.SetColor(Color.green);
+                }
+
                 if (_shield.CurrentShield <= 0)
                 {
                     uiInterface.SpaceshipShieldBarUi.SetActive(false);
@@ -61,6 +64,12 @@ namespace Assets.Scripts.Controller
                         uiInterface.SpaceshipHealthBarUi.SetActive(false);
                         uiInterface.SpaceshipHealthTextUi.SetActive(false);
                     }
+                }
+                else
+                {
+                    uiInterface.SpaceshipShieldBarUi.SetActive(true);
+                    uiInterface.SpaceshipShieldTextUi.SetActive(true);
+                    _shield.SetActive(true);
                 }
             }
         }

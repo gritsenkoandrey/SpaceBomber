@@ -27,7 +27,14 @@ public sealed class SpaceshipHealth : SpaceshipModel
 
     public float CurrentHealth
     {
-        get { return _currentHealth; }
+        get
+        {
+            if (_currentHealth > _maxHealth)
+            {
+                _currentHealth = _maxHealth;
+            }
+            return _currentHealth;
+        }
         private set { _currentHealth = value; }
     }
 
@@ -127,14 +134,10 @@ public sealed class SpaceshipHealth : SpaceshipModel
     }
 
     /// <summary>
-    /// Получение здоровья.
+    /// Пополнение здоровья.
     /// </summary>
     public void HealthTaken(float health)
     {
         CurrentHealth += health;
-        if (CurrentHealth > _maxHealth)
-        {
-            CurrentHealth = _maxHealth;
-        }
     }
 }

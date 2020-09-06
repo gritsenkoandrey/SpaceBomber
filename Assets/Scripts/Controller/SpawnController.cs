@@ -5,13 +5,13 @@ using UnityEngine;
 
 namespace Assets.Scripts.Controller
 {
-    public sealed class EnemyController : BaseController, IExecute, IInitialization
+    public sealed class SpawnController : BaseController, IExecute, IInitialization
     {
-        private SpawnEnemy _spawnEnemy;
+        private Spawn _spawn;
 
         public void Initialization()
         {
-            _spawnEnemy = Object.FindObjectOfType<SpawnEnemy>();
+            _spawn = Object.FindObjectOfType<Spawn>();
         }
 
         public void Execute()
@@ -21,8 +21,9 @@ namespace Assets.Scripts.Controller
                 return;
             }
 
-            _spawnEnemy.SpawnAsteroid();
-            _spawnEnemy.SpawnSpaceshipEnemies();
+            _spawn.SpawnAsteroid();
+            _spawn.SpawnSpaceshipEnemies();
+            _spawn.SpawnPickItems();
             EnemyManager.RollCall();
         }
     }

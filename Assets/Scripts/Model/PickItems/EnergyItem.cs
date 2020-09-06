@@ -5,8 +5,8 @@ namespace Assets.Scripts.Model.PickItems
 {
     public sealed class EnergyItem : PickItem
     {
-        [SerializeField] private float _energySpeed = 50.0f;
-        [SerializeField] private float _timeEffect = 5.0f;
+        [SerializeField] private float _gainSpeed = 50.0f;
+        [SerializeField] private float _timeLeft = 5.0f;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -15,7 +15,7 @@ namespace Assets.Scripts.Model.PickItems
             if (spaceshipMove)
             {
                 this.gameObject.GetComponent<PoolObject.PoolObject>().ReturnToPool();
-                spaceshipMove.PickEnergyItem(_energySpeed, _timeEffect);
+                spaceshipMove.PickEnergyItem(_gainSpeed, _timeLeft);
             }
         }
     }

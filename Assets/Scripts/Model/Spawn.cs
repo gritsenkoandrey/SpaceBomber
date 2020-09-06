@@ -3,7 +3,7 @@ using Assets.Scripts.PoolObject;
 using UnityEngine;
 
 
-public sealed class SpawnEnemy : BaseObjectScene
+public sealed class Spawn : BaseObjectScene
 {
     private readonly string[] _asteroids = { "Asteroid_1", "Asteroid_2",
         "Asteroid_3", "Asteroid_4", "Asteroid_5" };
@@ -12,11 +12,14 @@ public sealed class SpawnEnemy : BaseObjectScene
         "EnemySpaceship_7", "EnemySpaceship_8", "EnemySpaceship_9", "EnemySpaceship_10",
         "EnemySpaceship_11", "EnemySpaceship_12", "EnemySpaceship_13" };
 
+    private readonly string[] _pickItems = { "EnergyItem", "HealthItem", "ShieldItem" };
+
     private readonly float _minDelay = 1.0f;
-    private readonly float _maxDelay = 4.0f;
+    private readonly float _maxDelay = 5.0f;
 
     private float _nextAsteroid = 2.0f;
     private float _nextSpaceshipEnemy = 1.0f;
+    private float _nextPickItem = 5.0f;
 
     private float _posX;
     private readonly float _posY = 0;
@@ -61,6 +64,18 @@ public sealed class SpawnEnemy : BaseObjectScene
                 EnemyManager.AddEnemieToList(_enemie.GetComponent<SpaceshipEnemy>());
             }
             _nextSpaceshipEnemy = Time.time + Random.Range(_minDelay, _maxDelay);
+        }
+    }
+
+    public void SpawnPickItems()
+    {
+        if (Time.time > _nextPickItem)
+        {
+            _posX = RandomPosX();
+
+            PoolManager.GetObject(_pickItems[Random.Range(0, _pickItems.Length)],
+                new Vector3(_posX, _posY, _posZ), Quaternion.identity);
+            _nextPickItem = Time.time + _maxDelay;
         }
     }
 
