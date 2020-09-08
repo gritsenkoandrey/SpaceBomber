@@ -34,6 +34,7 @@ public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove, IExecute
     [SerializeField] private Transform _gun;
     private Bullet _bullet;
     private SpaceshipModel _spaceship;
+    private Spawn _spawn;
 
     public event Action<SpaceshipEnemy> OnDieChange;
 
@@ -41,6 +42,7 @@ public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove, IExecute
     {
         base.Awake();
         Move();
+        _spawn = FindObjectOfType<Spawn>();
     }
 
     public int CollisionDamage
@@ -63,7 +65,7 @@ public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove, IExecute
             this.gameObject.GetComponent<PoolObject>().ReturnToPool();
             AudioManager.Instance.PlaySound(_explosionShipSound);
             OnDieChange?.Invoke(this);
-
+            _spawn.SpawnPickItems(this.gameObject.transform.position);
             ScoreUI.instance.Score += _points;
         }
         else

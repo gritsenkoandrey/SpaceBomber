@@ -23,7 +23,6 @@ namespace Assets.Scripts.Controller
 
             _spawn.SpawnAsteroid();
             _spawn.SpawnSpaceshipEnemies();
-            _spawn.SpawnPickItems();
             EnemyManager.RollCall();
         }
     }

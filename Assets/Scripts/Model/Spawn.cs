@@ -7,8 +7,9 @@ public sealed class Spawn : BaseObjectScene
 {
     private readonly string[] _asteroids = { "Asteroid_1", "Asteroid_2",
         "Asteroid_3", "Asteroid_4", "Asteroid_5" };
+
     private readonly string[] _enemyShips = { "EnemySpaceship_1", "EnemySpaceship_2", 
-        "EnemySpaceship_3", "EnemySpaceship_4", "EnemySpaceship_5,", "EnemySpaceship_6",
+        "EnemySpaceship_3", "EnemySpaceship_4", "EnemySpaceship_5", "EnemySpaceship_6",
         "EnemySpaceship_7", "EnemySpaceship_8", "EnemySpaceship_9", "EnemySpaceship_10",
         "EnemySpaceship_11", "EnemySpaceship_12", "EnemySpaceship_13" };
 
@@ -19,7 +20,6 @@ public sealed class Spawn : BaseObjectScene
 
     private float _nextAsteroid = 2.0f;
     private float _nextSpaceshipEnemy = 1.0f;
-    private float _nextPickItem = 5.0f;
 
     private float _posX;
     private readonly float _posY = 0;
@@ -29,7 +29,7 @@ public sealed class Spawn : BaseObjectScene
     private float _difficulty;
     private readonly float _addDifficulty = 0.15f;
 
-    private GameObject _enemie;
+    private GameObject _obj;
 
     protected override void Awake()
     {
@@ -44,7 +44,7 @@ public sealed class Spawn : BaseObjectScene
             _posX = RandomPosX();
             _difficulty += _addDifficulty;
 
-            PoolManager.GetObject(_asteroids[Random.Range(0, _asteroids.Length)],
+            _obj = PoolManager.GetObject(_asteroids[Random.Range(0, _asteroids.Length)],
                 new Vector3(_posX, _posY, _posZ), Quaternion.identity);
             _nextAsteroid = Time.time + Random.Range(_minDelay, _maxDelay) / _difficulty;
         }
@@ -56,27 +56,16 @@ public sealed class Spawn : BaseObjectScene
         {
             _posX = RandomPosX();
 
-            _enemie = PoolManager.GetObject(_enemyShips[Random.Range(0, _enemyShips.Length)],
+            _obj = PoolManager.GetObject(_enemyShips[Random.Range(0, _enemyShips.Length)],
                 new Vector3(_posX, _posY, _posZ), Quaternion.identity);
-            //todo разобраться почему иногда прилетает null
-            if (_enemie != null)
-            {
-                EnemyManager.AddEnemieToList(_enemie.GetComponent<SpaceshipEnemy>());
-            }
+            EnemyManager.AddEnemieToList(_obj.GetComponent<SpaceshipEnemy>());
             _nextSpaceshipEnemy = Time.time + Random.Range(_minDelay, _maxDelay);
         }
     }
 
-    public void SpawnPickItems()
+    public void SpawnPickItems(Vector3 pos)
     {
-        if (Time.time > _nextPickItem)
-        {
-            _posX = RandomPosX();
-
-            PoolManager.GetObject(_pickItems[Random.Range(0, _pickItems.Length)],
-                new Vector3(_posX, _posY, _posZ), Quaternion.identity);
-            _nextPickItem = Time.time + _maxDelay;
-        }
+        PoolManager.GetObject(_pickItems[Random.Range(0, _pickItems.Length)], pos, Quaternion.identity);
     }
 
     private float RandomPosX()
