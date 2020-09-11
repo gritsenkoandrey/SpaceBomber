@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Manager;
+using UnityEngine;
 
 
 namespace Assets.Scripts.Model.PickItems
@@ -16,6 +17,8 @@ namespace Assets.Scripts.Model.PickItems
             {
                 this.gameObject.GetComponent<PoolObject.PoolObject>().ReturnToPool();
                 spaceshipMove.PickEnergyItem(_gainSpeed, _timeLeft);
+                scrollBackground.PickEnergyItem(_gainSpeed, _timeLeft);
+                AudioManager.Instance.PlaySound(_pickEnergyItem[Random.Range(0, _pickEnergyItem.Length)]);
             }
         }
     }

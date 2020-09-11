@@ -13,7 +13,7 @@ public sealed class Spawn : BaseObjectScene
         "EnemySpaceship_7", "EnemySpaceship_8", "EnemySpaceship_9", "EnemySpaceship_10",
         "EnemySpaceship_11", "EnemySpaceship_12", "EnemySpaceship_13" };
 
-    private readonly string[] _pickItems = { "EnergyItem", "HealthItem", "ShieldItem" };
+    private readonly string[] _pickItems = { "EnergyItem", "HealthItem", "ShieldItem", "RapidFireItem" };
 
     private readonly float _minDelay = 1.0f;
     private readonly float _maxDelay = 5.0f;

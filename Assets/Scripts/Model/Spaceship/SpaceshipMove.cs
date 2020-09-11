@@ -45,6 +45,11 @@ public sealed class SpaceshipMove : SpaceshipModel, IMove
         Rigidbody.rotation = Quaternion.Euler(_input.y, 0, -_input.x * _tilt);
     }
 
+    /// <summary>
+    /// Изменение скорости передвижения корабля.
+    /// </summary>
+    /// <param name="speed">Показатель на которую прибавляется скорость</param>
+    /// <param name="time">Время на которое прибавляется скорость</param>
     public void PickEnergyItem(float speed, float time)
     {
         CurrentSpeed += speed;

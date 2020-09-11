@@ -16,6 +16,8 @@ namespace Assets.Scripts.View
 
         private GamePauseUi _gamePauseUi;
 
+        private RapidFireItemUi _rapidFireItemUi;
+
         public ScoreUI ScoreUI
         {
             get
@@ -85,6 +87,18 @@ namespace Assets.Scripts.View
                     _gamePauseUi = Object.FindObjectOfType<GamePauseUi>();
                 }
                 return _gamePauseUi;
+            }
+        }
+
+        public RapidFireItemUi RapidFireItemUi
+        {
+            get
+            {
+                if (!_rapidFireItemUi)
+                {
+                    _rapidFireItemUi = Object.FindObjectOfType<RapidFireItemUi>();
+                }
+                return _rapidFireItemUi;
             }
         }
     }

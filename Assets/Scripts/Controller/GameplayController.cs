@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Interface;
+using Assets.Scripts.Model.PickItems;
 using UnityEngine;
 
 
@@ -10,6 +11,7 @@ namespace Assets.Scripts.Controller
     public sealed class GameplayController : BaseController, IExecute, IInitialization
     {
         private ScrollBackground _scrollBackground;
+        private RapidFireItem _rapidFireItem;
 
         public void Initialization()
         {
@@ -20,6 +22,7 @@ namespace Assets.Scripts.Controller
         public void Execute()
         {
             uiInterface.ScoreUI.ShowScore();
+            uiInterface.RapidFireItemUi.Text = Time.time;
             _scrollBackground.Move();
         }
 

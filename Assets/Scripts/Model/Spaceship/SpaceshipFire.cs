@@ -7,7 +7,9 @@ public sealed class SpaceshipFire : SpaceshipModel
 {
     private readonly float _forceAmmunition = 100.0f;
 
-    private readonly float _delay = 0.5f;
+    private float _delay;
+    private float _maxDelay = 0.5f;
+    private float _minDelay = 0.1f;
     private float _nextLaunchTime = 1.0f;
 
     private readonly string _bulletBlue = "BulletBlue";
@@ -24,6 +26,18 @@ public sealed class SpaceshipFire : SpaceshipModel
     {
         get { return _isFire; }
         set { _isFire = value; }
+    }
+
+    public float Delay
+    {
+        get { return _delay; }
+        private set { _delay = value; }
+    }
+
+    protected override void Awake()
+    {
+        base.Awake();
+        _delay = _maxDelay;
     }
 
     public void FireFirstWeapon()
@@ -62,5 +76,25 @@ public sealed class SpaceshipFire : SpaceshipModel
                 _nextLaunchTime = Time.time + _delay;
             }
         }
+    }
+
+    /// <summary>
+    /// Изменить задержу в выстрелах на время.
+    /// </summary>
+    /// <param name="delay">Показатель задержки</param>
+    /// <param name="time">Время действия эффекта</param>
+    public void ChangeDelay(float delay, float time)
+    {
+        Delay -= delay;
+        if (Delay < _minDelay)
+        {
+            Delay = _minDelay;
+        }
+        Invoke(nameof(ReturnToNormalDelay), time);
+    }
+
+    private void ReturnToNormalDelay()
+    {
+        Delay = _maxDelay;
     }
 }

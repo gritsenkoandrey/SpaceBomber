@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Manager;
+using UnityEngine;
 
 
 namespace Assets.Scripts.Model.PickItems
@@ -15,6 +16,7 @@ namespace Assets.Scripts.Model.PickItems
             {
                 this.gameObject.GetComponent<PoolObject.PoolObject>().ReturnToPool();
                 spaceshipShield.ShieldTaken(_gainShield);
+                AudioManager.Instance.PlaySound(_pickShieldItem);
             }
         }
     }
