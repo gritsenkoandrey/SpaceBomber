@@ -13,7 +13,10 @@ public sealed class Spawn : BaseObjectScene
         "EnemySpaceship_7", "EnemySpaceship_8", "EnemySpaceship_9", "EnemySpaceship_10",
         "EnemySpaceship_11", "EnemySpaceship_12", "EnemySpaceship_13" };
 
-    private readonly string[] _pickItems = { "EnergyItem", "HealthItem", "ShieldItem", "RapidFireItem" };
+    /// <summary>
+    /// Массив предметов, которые спавнятся после убийства вражеского врага.
+    /// </summary>
+    private readonly string[] _pickItems = { "HealthItem", "ShieldItem", "RapidFireItem" };
 
     private readonly float _minDelay = 1.0f;
     private readonly float _maxDelay = 5.0f;

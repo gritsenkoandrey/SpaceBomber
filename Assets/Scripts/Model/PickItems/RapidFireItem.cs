@@ -9,14 +9,14 @@ namespace Assets.Scripts.Model.PickItems
     /// </summary>
     public sealed class RapidFireItem : PickItem
     {
-        [SerializeField] private float _reduceDelay = 0.4f;
         [SerializeField] private float _timeEffect = 10.0f;
+        private float _reduceDelay = 0.4f;
 
-        public float TimeEffect
-        {
-            get { return _timeEffect; }
-            private set { _timeEffect = value; }
-        }
+        //public float TimeEffect
+        //{
+        //    get { return _timeEffect; }
+        //    private set { _timeEffect = value; }
+        //}
 
         private void OnTriggerEnter(Collider other)
         {
@@ -25,7 +25,7 @@ namespace Assets.Scripts.Model.PickItems
             if (spaceshipFire)
             {
                 this.gameObject.GetComponent<PoolObject.PoolObject>().ReturnToPool();
-                spaceshipFire.ChangeDelay(_reduceDelay, TimeEffect);
+                spaceshipFire.ChangeDelay(_reduceDelay, _timeEffect);
                 AudioManager.Instance.PlaySound(_pickRapidFireItem);
             }
         }

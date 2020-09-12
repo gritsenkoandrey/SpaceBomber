@@ -48,16 +48,4 @@ public sealed class ScrollBackground : BaseObjectScene, IMove
             transform.position = _startPos + new Vector3(0, 0, -_move);
         }
     }
-
-    // доработать метод
-    public void PickEnergyItem(float speed, float time)
-    {
-        CurrentSpeed += speed;
-        Invoke(nameof(ReturnToNormalSpeed), time);
-    }
-
-    private void ReturnToNormalSpeed()
-    {
-        CurrentSpeed = _speed;
-    }
 }

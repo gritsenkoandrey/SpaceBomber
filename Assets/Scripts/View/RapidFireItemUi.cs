@@ -27,5 +27,10 @@ namespace Assets.Scripts.View
         {
             _text.gameObject.SetActive(value);
         }
+
+        public void SetColor(Color color)
+        {
+            _text.color = color;
+        }
     }
 }

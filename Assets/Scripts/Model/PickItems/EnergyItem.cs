@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace Assets.Scripts.Model.PickItems
 {
+    /// <summary>
+    /// Класс отвечает за увеличение скорости корабля при подборе предмета.
+    /// </summary>
     public sealed class EnergyItem : PickItem
     {
         [SerializeField] private float _gainSpeed = 50.0f;
@@ -17,7 +20,6 @@ namespace Assets.Scripts.Model.PickItems
             {
                 this.gameObject.GetComponent<PoolObject.PoolObject>().ReturnToPool();
                 spaceshipMove.PickEnergyItem(_gainSpeed, _timeLeft);
-                scrollBackground.PickEnergyItem(_gainSpeed, _timeLeft);
                 AudioManager.Instance.PlaySound(_pickEnergyItem[Random.Range(0, _pickEnergyItem.Length)]);
             }
         }
