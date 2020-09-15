@@ -14421,7 +14421,7 @@ GameObject:
   - component: {fileID: 4785633174279089403}
   - component: {fileID: 4785633174279089398}
   - component: {fileID: -6794909837456113349}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: EnemySpaceship_7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14490,7 +14490,7 @@ MonoBehaviour:
   _collisionDamage: 50
   _layerMask:
     serializedVersion: 2
-    m_Bits: 8192
+    m_Bits: 2048
   _gun: {fileID: 4785633173997437885}
 --- !u!114 &-6794909837456113349
 MonoBehaviour:

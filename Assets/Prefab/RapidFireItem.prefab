@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 5548314939368824182}
   - component: {fileID: 8123210476651667390}
   - component: {fileID: 7286375870740452151}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: RapidFireItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -271,5 +271,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Rigidbody: {fileID: 0}
   Transform: {fileID: 0}
-  _delay: 0.4
   _timeEffect: 5

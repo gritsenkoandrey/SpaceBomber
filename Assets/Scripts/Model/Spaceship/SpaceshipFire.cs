@@ -13,7 +13,6 @@ public sealed class SpaceshipFire : SpaceshipModel
     private float _nextLaunchTime = 1.0f;
 
     private readonly string _bulletBlue = "BulletBlue";
-    private readonly string _bulletYellow = "BulletYellow";
 
     private bool _isFire = true;
 
@@ -65,11 +64,11 @@ public sealed class SpaceshipFire : SpaceshipModel
         {
             if (Time.time > _nextLaunchTime)
             {
-                prefab = PoolManager.GetObject(_bulletYellow, _gunThree.position, Quaternion.identity);
+                prefab = PoolManager.GetObject(_bulletBlue, _gunThree.position, Quaternion.identity);
                 prefab.GetComponent<Bullet>().Velocity(_forceAmmunition);
                 AudioManager.Instance.PlaySound("Laser15");
 
-                prefab = PoolManager.GetObject(_bulletYellow, _gunFour.position, Quaternion.identity);
+                prefab = PoolManager.GetObject(_bulletBlue, _gunFour.position, Quaternion.identity);
                 prefab.GetComponent<Bullet>().Velocity(_forceAmmunition);
                 AudioManager.Instance.PlaySound("Laser15");
 
