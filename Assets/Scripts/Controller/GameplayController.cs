@@ -14,7 +14,7 @@ namespace Assets.Scripts.Controller
         public void Initialization()
         {
             _scrollBackground = Object.FindObjectOfType<ScrollBackground>();
-            uiInterface.GamePauseUi.StartCondition();
+            uiInterface.MainMenuUi.StartCondition();
         }
 
         public void Execute()

@@ -15,12 +15,12 @@ TagManager:
   - UI
   - 
   - 
-  - Lighting
-  - Ground
-  - Postprocessing
+  - BulletPlayer
+  - BulletEnemy
+  - Asteroid
   - Player
-  - 
-  - 
+  - EnemySpaceship
+  - PickItem
   - 
   - 
   - 

@@ -15,7 +15,8 @@ namespace Assets.Scripts.View
         private SpaceshipShieldTextUi _spaceshipShieldTextUi;
 
         private GamePauseUi _gamePauseUi;
-
+        private MainMenuUi _mainMenuUi;
+ 
         private RapidFireItemUi _rapidFireItemUi;
 
         public ScoreUI ScoreUI
@@ -87,6 +88,18 @@ namespace Assets.Scripts.View
                     _gamePauseUi = Object.FindObjectOfType<GamePauseUi>();
                 }
                 return _gamePauseUi;
+            }
+        }
+
+        public MainMenuUi MainMenuUi
+        {
+            get
+            {
+                if (!_mainMenuUi)
+                {
+                    _mainMenuUi = Object.FindObjectOfType<MainMenuUi>();
+                }
+                return _mainMenuUi;
             }
         }
 
