@@ -17,7 +17,7 @@ namespace Assets.Scripts.UI
         private readonly float _timeToReach = 0.0001f;
 
         [SerializeField] private ButtonUi _resume;
-        [SerializeField] private ButtonUi _restart;
+        [SerializeField] private ButtonUi _mainMenu;
         [SerializeField] private ButtonUi _quit;
 
         [SerializeField] private AudioMixer _mixer;
@@ -25,7 +25,6 @@ namespace Assets.Scripts.UI
 
         private AudioMixerSnapshot _pause;
         private AudioMixerSnapshot _unPause;
-
 
         protected override void Awake()
         {
@@ -35,11 +34,10 @@ namespace Assets.Scripts.UI
             _unPause = _mixer.FindSnapshot(_unPausedSnapshot);
 
             _resume.GetButton.onClick.AddListener(delegate { Pause(); });
-            _restart.GetButton.onClick.AddListener(delegate { RestartGame(); });
+            _mainMenu.GetButton.onClick.AddListener(delegate { RestartGame(); });
             _quit.GetButton.onClick.AddListener(delegate { QuitGame(); });
         }
 
-        //todo доработать состояние корабля во время паузы
         public void Pause()
         {
             _isPaused = !_isPaused;

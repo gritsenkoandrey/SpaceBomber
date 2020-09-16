@@ -11,6 +11,10 @@ namespace Assets.Scripts.UI
         [SerializeField] private ButtonUi _settings;
         [SerializeField] private ButtonUi _quit;
 
+        //private readonly string[] _audioGameTheme = 
+        //    { "Game_theme_1", "Game_theme_2", "Game_theme_3", "Game_theme_4", "Game_theme_5" };
+
+
         protected override void Awake()
         {
             base.Awake();
@@ -29,7 +33,7 @@ namespace Assets.Scripts.UI
             ship.IsFire = true;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-            AudioManager.Instance.PlaySound(audioGameTheme[Random.Range(0, audioGameTheme.Length)]);
+            //AudioManager.Instance.PlaySound(_audioGameTheme[Random.Range(0, _audioGameTheme.Length)]);
         }
 
         private void SettingsGame()

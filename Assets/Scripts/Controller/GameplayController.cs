@@ -13,8 +13,8 @@ namespace Assets.Scripts.Controller
 
         public void Initialization()
         {
-            _scrollBackground = Object.FindObjectOfType<ScrollBackground>();
             uiInterface.MainMenuUi.StartCondition();
+            _scrollBackground = Object.FindObjectOfType<ScrollBackground>();
         }
 
         public void Execute()

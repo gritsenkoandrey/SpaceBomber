@@ -23,7 +23,6 @@ public sealed class SpaceshipHealth : SpaceshipModel
     private Bullet _bullet;
     private SpaceshipEnemy _enemyShip;
     private AsteroidModel _asteroid;
-    private SpaceshipShield _shield;
 
     public float CurrentHealth
     {
@@ -67,7 +66,8 @@ public sealed class SpaceshipHealth : SpaceshipModel
     {
         base.Awake();
         _currentHealth = _maxHealth;
-        _shield = GetComponentInChildren<SpaceshipShield>();
+        shield = GetComponentInChildren<SpaceshipShield>();
+        fire = GetComponent<SpaceshipFire>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -105,6 +105,7 @@ public sealed class SpaceshipHealth : SpaceshipModel
 
             if (_currentHealth <= _minHealth)
             {
+                fire.IsFire = false;
                 prefab = PoolManager.GetObject
                     (_explosionShip, this.gameObject.transform.position, Quaternion.identity);
                 //explosion add to pool object
@@ -121,14 +122,14 @@ public sealed class SpaceshipHealth : SpaceshipModel
     /// <param name="damage">Полученный урон</param>
     private void DamageTaken(int damage)
     {
-        if (_shield.CurrentShield >= damage)
+        if (shield.CurrentShield >= damage)
         {
-            _shield.CurrentShield -= damage;
+            shield.CurrentShield -= damage;
         }
         else
         {
-            _tempValue = damage - _shield.CurrentShield;
-            _shield.CurrentShield = _shieldDestroyed;
+            _tempValue = damage - shield.CurrentShield;
+            shield.CurrentShield = _shieldDestroyed;
             CurrentHealth -= _tempValue;
         }
     }
