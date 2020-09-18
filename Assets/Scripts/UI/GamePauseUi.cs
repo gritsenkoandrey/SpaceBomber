@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.Audio;
 using UnityEditor;
 using UnityEngine.SceneManagement;
 using Assets.Scripts.Model;
@@ -12,26 +11,18 @@ namespace Assets.Scripts.UI
     {
         private bool _isPaused = false;
         private readonly byte _gameScene = 0;
-        private readonly string _pausedSnapshot = "Paused";
-        private readonly string _unPausedSnapshot = "UnPaused";
-        private readonly float _timeToReach = 0.0001f;
 
         [SerializeField] private ButtonUi _resume;
         [SerializeField] private ButtonUi _mainMenu;
         [SerializeField] private ButtonUi _quit;
 
-        [SerializeField] private AudioMixer _mixer;
-        [SerializeField] private AudioMixerGroup _mixerGroup;
-
-        private AudioMixerSnapshot _pause;
-        private AudioMixerSnapshot _unPause;
 
         protected override void Awake()
         {
             base.Awake();
 
-            _pause = _mixer.FindSnapshot(_pausedSnapshot);
-            _unPause = _mixer.FindSnapshot(_unPausedSnapshot);
+            pause = mixer.FindSnapshot(pausedSnapshot);
+            unPause = mixer.FindSnapshot(unPausedSnapshot);
 
             _resume.GetButton.onClick.AddListener(delegate { Pause(); });
             _mainMenu.GetButton.onClick.AddListener(delegate { RestartGame(); });
@@ -45,7 +36,7 @@ namespace Assets.Scripts.UI
             if (_isPaused)
             {
                 Time.timeScale = timeOff;
-                _pause.TransitionTo(_timeToReach);
+                pause.TransitionTo(timeToReach);
                 pausePanel.SetActive(true);
                 gamePanel.SetActive(false);
                 ship.IsFire = false;
@@ -55,7 +46,7 @@ namespace Assets.Scripts.UI
             else
             {
                 Time.timeScale = timeOn;
-                _unPause.TransitionTo(_timeToReach);
+                unPause.TransitionTo(timeToReach);
                 pausePanel.SetActive(false);
                 gamePanel.SetActive(true);
                 ship.IsFire = true;
@@ -77,7 +68,7 @@ namespace Assets.Scripts.UI
         private void RestartGame()
         {
             Time.timeScale = timeOn;
-            _unPause.TransitionTo(_timeToReach);
+            unPause.TransitionTo(timeToReach);
             EnemyManager.Cleanup();
             ServiceLocator.Cleanup();
             ServiceLocatorMonoBehaviour.Cleanup();

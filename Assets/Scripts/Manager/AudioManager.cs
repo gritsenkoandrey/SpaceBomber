@@ -24,6 +24,7 @@ namespace Assets.Scripts.Manager
         //    {
         //        Resources.UnloadAsset(_clip);
         //        _clip = null;
+        //        Debug.Log("Clip", _clip);
         //    }
         //}
 
@@ -31,6 +32,11 @@ namespace Assets.Scripts.Manager
         {
             _clip = Resources.Load(resourceName) as AudioClip;
             _source.PlayOneShot(_clip);
+        }
+
+        public void StopSound()
+        {
+            Resources.UnloadAsset(_clip);
         }
     }
 }

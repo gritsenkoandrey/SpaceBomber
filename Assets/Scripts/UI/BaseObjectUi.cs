@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Model;
 using UnityEngine;
+using UnityEngine.Audio;
 
 
 namespace Assets.Scripts.UI
@@ -9,10 +10,17 @@ namespace Assets.Scripts.UI
         [SerializeField] protected GameObject gamePanel;
         [SerializeField] protected GameObject pausePanel;
         [SerializeField] protected GameObject mainMenuPanel;
-        [SerializeField] private GameObject[] _background;
+
+        [SerializeField] protected AudioMixer mixer;
+        protected AudioMixerSnapshot pause;
+        protected AudioMixerSnapshot unPause;
 
         protected readonly byte timeOn = 1;
         protected readonly byte timeOff = 0;
+        protected readonly float timeToReach = 0.0001f;
+
+        protected readonly string pausedSnapshot = "Paused";
+        protected readonly string unPausedSnapshot = "UnPaused";
 
         protected SpaceshipFire ship;
 
@@ -20,21 +28,6 @@ namespace Assets.Scripts.UI
         {
             base.Awake();
             ship = Object.FindObjectOfType<SpaceshipFire>();
-        }
-
-        /// <summary>
-        /// Управление GamePanel, PausePanel, MainMenuPanel, SettingsPanel при старте игры.
-        /// </summary>
-        public void StartCondition()
-        {
-            mainMenuPanel.SetActive(true);
-            gamePanel.SetActive(true);
-            pausePanel.SetActive(false);
-            Time.timeScale = timeOff;
-            ship.IsFire = false;
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            _background[Random.Range(0, _background.Length)].SetActive(true);
         }
     }
 }
