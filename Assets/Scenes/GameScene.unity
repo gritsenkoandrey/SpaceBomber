@@ -1939,15 +1939,15 @@ MonoBehaviour:
   - Name: BulletBlue
     Prefab: {fileID: -2055978651918283125, guid: 30b26205444b28545a37ec1012b7e134,
       type: 3}
-    Count: 50
+    Count: 100
   - Name: BulletYellow
     Prefab: {fileID: -2639532657066676287, guid: 0fb6a1e22e20a414388f3e450e881ab3,
       type: 3}
-    Count: 50
+    Count: 10
   - Name: AsteroidExplosion
     Prefab: {fileID: -542622818460157958, guid: 2d7bf04e1c6193e40ae8c5e327eed8c9,
       type: 3}
-    Count: 10
+    Count: 20
   - Name: ShipExplosion
     Prefab: {fileID: -3752181261135171767, guid: 6495ae43276846543a875fbdf22091d3,
       type: 3}

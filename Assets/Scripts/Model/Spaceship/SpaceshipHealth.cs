@@ -15,10 +15,10 @@ public sealed class SpaceshipHealth : SpaceshipModel
     private float _tempValue;
     private readonly byte _shieldDestroyed = 0;
 
-    private readonly string _explosionShip = "ShipExplosion";
-    private readonly string _explosionAsteroid = "AsteroidExplosion";
-    private readonly string _explosionAsteroidSound = "Grenade3Short";
-    private readonly string _explosionShipSound = "Grenade6Short";
+    private readonly string _explosionShipPrefab = "ShipExplosion";
+    private readonly string _explosionAsteroidPrefab = "AsteroidExplosion";
+    private readonly string _explosionAsteroidSound = "explosion_asteroid";
+    private readonly string _explosionShipSound = "explosion_spaceship";
 
     private Bullet _bullet;
     private SpaceshipEnemy _enemyShip;
@@ -87,7 +87,7 @@ public sealed class SpaceshipHealth : SpaceshipModel
             {
                 DamageTaken(_enemyShip.CollisionDamage);
                 prefab = PoolManager.GetObject
-                    (_explosionShip, _enemyShip.transform.position, Quaternion.identity);
+                    (_explosionShipPrefab, _enemyShip.transform.position, Quaternion.identity);
                 StartCoroutine(ReturnToPool(prefab));
                 _enemyShip.GetComponent<PoolObject>().ReturnToPool();
                 EnemyManager.RemoveEnemieToList(_enemyShip);
@@ -97,7 +97,7 @@ public sealed class SpaceshipHealth : SpaceshipModel
             {
                 DamageTaken(_asteroid.CollisionDamage);
                 prefab = PoolManager.GetObject
-                    (_explosionAsteroid, this.gameObject.transform.position, Quaternion.identity);
+                    (_explosionAsteroidPrefab, this.gameObject.transform.position, Quaternion.identity);
                 StartCoroutine(ReturnToPool(prefab));
                 _asteroid.GetComponent<PoolObject>().ReturnToPool();
                 AudioManager.Instance.PlaySound(_explosionAsteroidSound);
@@ -107,7 +107,7 @@ public sealed class SpaceshipHealth : SpaceshipModel
             {
                 fire.IsFire = false;
                 prefab = PoolManager.GetObject
-                    (_explosionShip, this.gameObject.transform.position, Quaternion.identity);
+                    (_explosionShipPrefab, this.gameObject.transform.position, Quaternion.identity);
                 //explosion add to pool object
                 StartCoroutine(ReturnToPool(prefab));
                 this.gameObject.GetComponent<PoolObject>().ReturnToPool();

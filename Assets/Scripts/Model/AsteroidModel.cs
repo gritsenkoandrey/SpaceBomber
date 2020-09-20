@@ -19,8 +19,8 @@ public sealed class AsteroidModel : BaseObjectScene, IMove
 
     private readonly byte _points = 5;
 
-    private readonly string _explosionAsteroid = "AsteroidExplosion";
-    private readonly string _explosionAsteroidSound = "Grenade3Short";
+    private readonly string _explosionAsteroidPrefab = "AsteroidExplosion";
+    private readonly string _explosionAsteroidSound = "explosion_asteroid";
     private Bullet _bullet;
 
     public int CollisionDamage
@@ -41,7 +41,7 @@ public sealed class AsteroidModel : BaseObjectScene, IMove
         if (_bullet)
         {
             prefab = PoolManager.GetObject
-                (_explosionAsteroid, this.gameObject.transform.position, Quaternion.identity);
+                (_explosionAsteroidPrefab, this.gameObject.transform.position, Quaternion.identity);
             StartCoroutine(ReturnToPool(prefab));
             this.gameObject.GetComponent<PoolObject>().ReturnToPool();
             _bullet.GetComponent<PoolObject>().ReturnToPool();

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Assets.Scripts.Controller
 {
     /// <summary>
-    /// GameplayController управляет ScrollBackground, ScoreUI, GamePauseUi
+    /// GameplayController управляет ScrollBackground, ScoreUI, GamePauseUi, MainMenuUi
     /// </summary>
     public sealed class GameplayController : BaseController, IExecute, IInitialization
     {

@@ -14,10 +14,10 @@ public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove, IExecute
     private readonly float _maxSpeed = 50.0f;
     [SerializeField] private int _collisionDamage = 50;
 
-    private readonly string _bulletYellow = "BulletYellow";
-    private readonly string _explosionShip = "ShipExplosion";
-    private readonly string _explosionShipSound = "Grenade6Short";
-    private readonly string _bulletSound = "Laser19";
+    private readonly string _bulletYellowPrefab = "BulletYellow";
+    private readonly string _explosionShipPrefab = "ShipExplosion";
+    private readonly string _explosionShipSound = "explosion_spaceship";
+    private readonly string _audioBullet = "laser_spaceship_03";
 
     private readonly float _forceAmmunition = -75.0f;
 
@@ -59,7 +59,7 @@ public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove, IExecute
         {
             _bullet.GetComponent<PoolObject>().ReturnToPool();
             prefab = PoolManager.GetObject
-                (_explosionShip, this.gameObject.transform.position, Quaternion.identity);
+                (_explosionShipPrefab, this.gameObject.transform.position, Quaternion.identity);
             //explosion return to pool
             StartCoroutine(ReturnToPool(prefab));
             this.gameObject.GetComponent<PoolObject>().ReturnToPool();
@@ -88,9 +88,9 @@ public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove, IExecute
 
             if (_spaceship && Time.time > _nextLaunchTime)
             {
-                prefab = PoolManager.GetObject(_bulletYellow, _gun.position, Quaternion.identity);
+                prefab = PoolManager.GetObject(_bulletYellowPrefab, _gun.position, Quaternion.identity);
                 prefab.GetComponent<Bullet>().Velocity(_forceAmmunition);
-                AudioManager.Instance.PlaySound(_bulletSound);
+                AudioManager.Instance.PlaySound(_audioBullet);
                 _nextLaunchTime = Time.time + _delay;
             }
         }

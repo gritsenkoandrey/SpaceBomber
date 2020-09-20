@@ -12,7 +12,9 @@ public sealed class SpaceshipFire : SpaceshipModel
     private float _minDelay = 0.1f;
     private float _nextLaunchTime = 1.0f;
 
-    private readonly string _bulletBlue = "BulletBlue";
+    private readonly string _bulletBluePrefab = "BulletBlue";
+    private readonly string _audioBulletOne = "laser_spaceship_01";
+    private readonly string _audioBulletTwo = "laser_spaceship_02";
 
     private bool _isFire = true;
 
@@ -45,13 +47,13 @@ public sealed class SpaceshipFire : SpaceshipModel
         {
             if (Time.time > _nextLaunchTime)
             {
-                prefab = PoolManager.GetObject(_bulletBlue, _gunOne.position, Quaternion.identity);
+                prefab = PoolManager.GetObject(_bulletBluePrefab, _gunOne.position, Quaternion.identity);
                 prefab.GetComponent<Bullet>().Velocity(_forceAmmunition);
-                AudioManager.Instance.PlaySound("Laser20");
+                AudioManager.Instance.PlaySound(_audioBulletOne);
 
-                prefab = PoolManager.GetObject(_bulletBlue, _gunTwo.position, Quaternion.identity);
+                prefab = PoolManager.GetObject(_bulletBluePrefab, _gunTwo.position, Quaternion.identity);
                 prefab.GetComponent<Bullet>().Velocity(_forceAmmunition);
-                AudioManager.Instance.PlaySound("Laser20");
+                AudioManager.Instance.PlaySound(_audioBulletOne);
 
                 _nextLaunchTime = Time.time + _delay;
             }
@@ -64,13 +66,13 @@ public sealed class SpaceshipFire : SpaceshipModel
         {
             if (Time.time > _nextLaunchTime)
             {
-                prefab = PoolManager.GetObject(_bulletBlue, _gunThree.position, Quaternion.identity);
+                prefab = PoolManager.GetObject(_bulletBluePrefab, _gunThree.position, Quaternion.identity);
                 prefab.GetComponent<Bullet>().Velocity(_forceAmmunition);
-                AudioManager.Instance.PlaySound("Laser15");
+                AudioManager.Instance.PlaySound(_audioBulletTwo);
 
-                prefab = PoolManager.GetObject(_bulletBlue, _gunFour.position, Quaternion.identity);
+                prefab = PoolManager.GetObject(_bulletBluePrefab, _gunFour.position, Quaternion.identity);
                 prefab.GetComponent<Bullet>().Velocity(_forceAmmunition);
-                AudioManager.Instance.PlaySound("Laser15");
+                AudioManager.Instance.PlaySound(_audioBulletTwo);
 
                 _nextLaunchTime = Time.time + _delay;
             }

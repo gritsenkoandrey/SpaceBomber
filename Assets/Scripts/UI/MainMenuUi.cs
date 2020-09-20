@@ -12,7 +12,7 @@ namespace Assets.Scripts.UI
         [SerializeField] private ButtonUi _quit;
         [SerializeField] private GameObject[] _background;
 
-        private readonly string _audioMainMenu = "MainMenu_theme";
+        private readonly string _audioMainMenu = "main_menu_theme";
 
         protected override void Awake()
         {
