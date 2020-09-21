@@ -5,7 +5,7 @@ using UnityEngine.Audio;
 
 namespace Assets.Scripts.UI
 {
-    public abstract class BaseObjectUi : BaseObjectScene
+    public abstract class BaseObjectUi : MonoBehaviour
     {
         [SerializeField] protected GameObject gamePanel;
         [SerializeField] protected GameObject pausePanel;
@@ -25,9 +25,8 @@ namespace Assets.Scripts.UI
 
         protected SpaceshipFire ship;
 
-        protected override void Awake()
+        protected virtual void Awake()
         {
-            base.Awake();
             ship = Object.FindObjectOfType<SpaceshipFire>();
         }
     }

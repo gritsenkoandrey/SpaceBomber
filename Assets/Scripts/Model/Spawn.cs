@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Model;
 using Assets.Scripts.PoolObject;
+using Assets.Scripts.TimeRemainings;
 using UnityEngine;
 
 
@@ -18,11 +19,11 @@ public sealed class Spawn : BaseObjectScene
     /// </summary>
     private readonly string[] _pickItems = { "HealthItem", "ShieldItem", "RapidFireItem" };
 
-    private readonly float _minDelay = 1.0f;
-    private readonly float _maxDelay = 5.0f;
+    private readonly float _minDelay = 2.0f;
+    private readonly float _maxDelay = 7.0f;
 
     private float _nextAsteroid = 2.0f;
-    private float _nextSpaceshipEnemy = 1.0f;
+    private float _nextSpaceshipEnemy = 2.5f;
 
     private float _posX;
     private readonly float _posY = 0;
@@ -33,36 +34,48 @@ public sealed class Spawn : BaseObjectScene
     private readonly float _addDifficulty = 0.15f;
 
     private GameObject _obj;
+    private TimeRemaining _timeRemainingAsteroid;
+    private TimeRemaining _timeRemainingSpaceship;
+    private bool _isReadyAsteroid = true;
+    private bool _isReadySpaceship = true;
 
     protected override void Awake()
     {
         base.Awake();
         _posZ = transform.position.z;
+        _timeRemainingAsteroid = new TimeRemaining(ReadyToSpawnAsteroid, _nextAsteroid);
+        _timeRemainingSpaceship = new TimeRemaining(ReadyToSpawnSpaceship, _nextSpaceshipEnemy);
     }
 
     public void SpawnAsteroid()
     {
-        if (Time.time > _nextAsteroid)
+        if (_isReadyAsteroid)
         {
             _posX = RandomPosX();
             _difficulty += _addDifficulty;
 
             _obj = PoolManager.GetObject(_asteroids[Random.Range(0, _asteroids.Length)],
                 new Vector3(_posX, _posY, _posZ), Quaternion.identity);
-            _nextAsteroid = Time.time + Random.Range(_minDelay, _maxDelay) / _difficulty;
+
+            _isReadyAsteroid = false;
+            _timeRemainingAsteroid.AddTimeRemaining();
+            _timeRemainingAsteroid.CurrentTime /= _difficulty;
         }
     }
 
     public void SpawnSpaceshipEnemies()
     {
-        if (Time.time > _nextSpaceshipEnemy)
+        if (_isReadySpaceship)
         {
             _posX = RandomPosX();
 
             _obj = PoolManager.GetObject(_enemyShips[Random.Range(0, _enemyShips.Length)],
                 new Vector3(_posX, _posY, _posZ), Quaternion.identity);
             EnemyManager.AddEnemieToList(_obj.GetComponent<SpaceshipEnemy>());
-            _nextSpaceshipEnemy = Time.time + Random.Range(_minDelay, _maxDelay);
+
+            _isReadySpaceship = false;
+            _timeRemainingSpaceship.AddTimeRemaining();
+            _timeRemainingSpaceship.CurrentTime = Random.Range(_minDelay, _maxDelay);
         }
     }
 
@@ -74,5 +87,15 @@ public sealed class Spawn : BaseObjectScene
     private float RandomPosX()
     {
         return Random.Range(-transform.localScale.x * _half, transform.localScale.x * _half);
+    }
+
+    private void ReadyToSpawnAsteroid()
+    {
+        _isReadyAsteroid = true;
+    }
+
+    private void ReadyToSpawnSpaceship()
+    {
+        _isReadySpaceship = true;
     }
 }

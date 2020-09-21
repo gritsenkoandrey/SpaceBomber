@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Interface;
 using Assets.Scripts.ServiceLocators;
+using Assets.Scripts.TimeRemainings;
 
 
 namespace Assets.Scripts.Controller
@@ -27,12 +28,14 @@ namespace Assets.Scripts.Controller
             ServiceLocator.SetService(new SpaceshipController());
             ServiceLocator.SetService(new SpawnController());
             ServiceLocator.SetService(new GameplayController());
+            ServiceLocator.SetService(new TimeRemainingController());
 
-            _executeControllers = new IExecute[4];
+            _executeControllers = new IExecute[5];
             _executeControllers[0] = ServiceLocator.Resolve<InputController>();
             _executeControllers[1] = ServiceLocator.Resolve<SpaceshipController>();
             _executeControllers[2] = ServiceLocator.Resolve<SpawnController>();
             _executeControllers[3] = ServiceLocator.Resolve<GameplayController>();
+            _executeControllers[4] = ServiceLocator.Resolve<TimeRemainingController>();
         }
 
         public void Initialization()

@@ -3,6 +3,7 @@ using Assets.Scripts.Interface;
 using Assets.Scripts.Manager;
 using Assets.Scripts.Model;
 using Assets.Scripts.PoolObject;
+using Assets.Scripts.TimeRemainings;
 using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -21,8 +22,9 @@ public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove, IExecute
 
     private readonly float _forceAmmunition = -75.0f;
 
-    private readonly float _delay = 2.0f;
     private float _nextLaunchTime = 2.0f;
+    private bool _isReady = true;
+    private TimeRemaining _timeRemaining;
 
     private readonly byte _points = 10;
 
@@ -43,6 +45,7 @@ public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove, IExecute
         base.Awake();
         Move();
         _spawn = FindObjectOfType<Spawn>();
+        _timeRemaining = new TimeRemaining(ReadyShoot, _nextLaunchTime);
     }
 
     public int CollisionDamage
@@ -86,12 +89,13 @@ public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove, IExecute
         {
             _spaceship = _hit.collider.gameObject.GetComponent<SpaceshipModel>();
 
-            if (_spaceship && Time.time > _nextLaunchTime)
+            if (_spaceship && _isReady)
             {
                 prefab = PoolManager.GetObject(_bulletYellowPrefab, _gun.position, Quaternion.identity);
                 prefab.GetComponent<Bullet>().Velocity(_forceAmmunition);
                 AudioManager.Instance.PlaySound(_audioBullet);
-                _nextLaunchTime = Time.time + _delay;
+                _isReady = false;
+                _timeRemaining.AddTimeRemaining();
             }
         }
     }
@@ -100,5 +104,10 @@ public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove, IExecute
     {
         Rigidbody = GetComponent<Rigidbody>();
         Rigidbody.velocity = -new Vector3(0, 0, Random.Range(_minSpeed, _maxSpeed));
+    }
+
+    private void ReadyShoot()
+    {
+        _isReady = true;
     }
 }

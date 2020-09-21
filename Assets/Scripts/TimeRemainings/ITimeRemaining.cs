@@ -1,0 +1,13 @@
+﻿using System;
+
+
+namespace Assets.Scripts.TimeRemainings
+{
+    public interface ITimeRemaining
+    {
+        Action Method { get; }
+        bool IsRepeating { get; }
+        float Time { get; }
+        float CurrentTime { get; set; }
+    }
+}
