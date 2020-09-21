@@ -16,6 +16,7 @@ namespace Assets.Scripts.View
 
         private GamePauseUi _gamePauseUi;
         private MainMenuUi _mainMenuUi;
+        private SettingsMenuUi _settingsMenu;
  
         private RapidFireItemUi _rapidFireItemUi;
 
@@ -100,6 +101,18 @@ namespace Assets.Scripts.View
                     _mainMenuUi = Object.FindObjectOfType<MainMenuUi>();
                 }
                 return _mainMenuUi;
+            }
+        }
+
+        public SettingsMenuUi SettingsMenuUi
+        {
+            get
+            {
+                if (!_settingsMenu)
+                {
+                    _settingsMenu = Object.FindObjectOfType<SettingsMenuUi>();
+                }
+                return _settingsMenu;
             }
         }
 

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts.UI
 {
-    public sealed class ButtonUi : BaseObjectUi
+    public sealed class ButtonUi : MonoBehaviour
     {
         private Text _text;
         private Button _button;

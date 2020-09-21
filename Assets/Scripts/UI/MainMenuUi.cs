@@ -41,6 +41,10 @@ namespace Assets.Scripts.UI
 
         private void SettingsGame()
         {
+            gamePanel.SetActive(true);
+            mainMenuPanel.SetActive(false);
+            pausePanel.SetActive(false);
+            settingsPanel.SetActive(true);
         }
 
         private void QuitGame()
@@ -60,6 +64,8 @@ namespace Assets.Scripts.UI
             mainMenuPanel.SetActive(true);
             gamePanel.SetActive(true);
             pausePanel.SetActive(false);
+            settingsPanel.SetActive(false);
+
             Time.timeScale = timeOff;
             ship.IsFire = false; // деактивируем возможность стрельбы карабля в главном меню
             Cursor.lockState = CursorLockMode.None;

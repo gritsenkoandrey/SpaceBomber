@@ -10,6 +10,7 @@ namespace Assets.Scripts.UI
         [SerializeField] protected GameObject gamePanel;
         [SerializeField] protected GameObject pausePanel;
         [SerializeField] protected GameObject mainMenuPanel;
+        [SerializeField] protected GameObject settingsPanel;
 
         [SerializeField] protected AudioMixer mixer;
         protected AudioMixerSnapshot pause;
