@@ -2909,7 +2909,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &961711900
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3072,7 +3072,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &975870342
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3849,8 +3849,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b39c79639dbcc78448bf3b9cc41adf88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Rigidbody: {fileID: 0}
-  Transform: {fileID: 0}
   gamePanel: {fileID: 869358024}
   pausePanel: {fileID: 1971960748}
   mainMenuPanel: {fileID: 961711899}
@@ -3871,8 +3869,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6d1095249ca8ff4a8188f0426d0b550, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Rigidbody: {fileID: 0}
-  Transform: {fileID: 0}
   gamePanel: {fileID: 869358024}
   pausePanel: {fileID: 1971960748}
   mainMenuPanel: {fileID: 961711899}
@@ -3898,8 +3894,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea42216a936e897409596a9650fa1b9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Rigidbody: {fileID: 0}
-  Transform: {fileID: 0}
   gamePanel: {fileID: 869358024}
   pausePanel: {fileID: 1971960748}
   mainMenuPanel: {fileID: 961711899}
@@ -5547,7 +5541,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1971960749
 RectTransform:
   m_ObjectHideFlags: 0

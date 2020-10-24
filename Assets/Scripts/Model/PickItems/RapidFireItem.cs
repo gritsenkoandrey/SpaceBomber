@@ -9,14 +9,8 @@ namespace Assets.Scripts.Model.PickItems
     /// </summary>
     public sealed class RapidFireItem : PickItem
     {
-        [SerializeField] private float _timeEffect = 10.0f;
+        [SerializeField] private float _timeEffect = 20.0f;
         private float _reduceDelay = 0.4f;
-
-        //public float TimeEffect
-        //{
-        //    get { return _timeEffect; }
-        //    private set { _timeEffect = value; }
-        //}
 
         private void OnTriggerEnter(Collider other)
         {

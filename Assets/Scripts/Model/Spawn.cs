@@ -31,7 +31,7 @@ public sealed class Spawn : BaseObjectScene
     private readonly float _half = 0.5f;
 
     private float _difficulty;
-    private readonly float _addDifficulty = 0.15f;
+    private readonly float _addDifficulty = 0.1f;
 
     private GameObject _obj;
     private TimeRemaining _timeRemainingAsteroid;

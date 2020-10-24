@@ -9,9 +9,9 @@ public sealed class SpaceshipFire : SpaceshipModel
     private readonly float _forceAmmunition = 100.0f;
 
     private float _delay;
-    private float _maxDelay = 0.5f;
-    private float _minDelay = 0.1f;
-    private float _nextLaunchTime = 0.5f;
+    private readonly float _maxDelay = 0.4f;
+    private readonly float _minDelay = 0.1f;
+    private readonly float _nextLaunchTime = 0.1f;
 
     private TimeRemaining _timeRemaining;
 
@@ -60,17 +60,7 @@ public sealed class SpaceshipFire : SpaceshipModel
 
             _isReady = false;
             _timeRemaining.AddTimeRemaining();
-
-            //if (Time.time > _nextLaunchTime)
-            //{
-            //    prefab = PoolManager.GetObject(_bulletBluePrefab, _gunOne.position, Quaternion.identity);
-            //    prefab.GetComponent<Bullet>().Velocity(_forceAmmunition);
-            //    AudioManager.Instance.PlaySound(_audioBulletOne);
-            //    prefab = PoolManager.GetObject(_bulletBluePrefab, _gunTwo.position, Quaternion.identity);
-            //    prefab.GetComponent<Bullet>().Velocity(_forceAmmunition);
-            //    AudioManager.Instance.PlaySound(_audioBulletOne);
-            //    _nextLaunchTime = Time.time + _delay;
-            //}
+            _timeRemaining.CurrentTime += Delay;
         }
     }
 
@@ -88,17 +78,7 @@ public sealed class SpaceshipFire : SpaceshipModel
 
             _isReady = false;
             _timeRemaining.AddTimeRemaining();
-
-            //if (Time.time > _nextLaunchTime)
-            //{
-            //    prefab = PoolManager.GetObject(_bulletBluePrefab, _gunThree.position, Quaternion.identity);
-            //    prefab.GetComponent<Bullet>().Velocity(_forceAmmunition);
-            //    AudioManager.Instance.PlaySound(_audioBulletTwo);
-            //    prefab = PoolManager.GetObject(_bulletBluePrefab, _gunFour.position, Quaternion.identity);
-            //    prefab.GetComponent<Bullet>().Velocity(_forceAmmunition);
-            //    AudioManager.Instance.PlaySound(_audioBulletTwo);
-            //    _nextLaunchTime = Time.time + _delay;
-            //}
+            _timeRemaining.CurrentTime += Delay;
         }
     }
     // todo доработать метод, чтобы при подборе 
