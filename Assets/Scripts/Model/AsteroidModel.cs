@@ -3,6 +3,7 @@ using Assets.Scripts.Interface;
 using Assets.Scripts.Manager;
 using Assets.Scripts.Model;
 using Assets.Scripts.PoolObject;
+using Assets.Scripts.TimeRemainings;
 using UnityEngine;
 
 
@@ -42,7 +43,7 @@ public sealed class AsteroidModel : BaseObjectScene, IMove
         {
             prefab = PoolManager.GetObject
                 (_explosionAsteroidPrefab, this.gameObject.transform.position, Quaternion.identity);
-            StartCoroutine(ReturnToPool(prefab));
+            timeRemainingReturnToPool.AddTimeRemaining();
             this.gameObject.GetComponent<PoolObject>().ReturnToPool();
             _bullet.GetComponent<PoolObject>().ReturnToPool();
             AudioManager.Instance.PlaySound(_explosionAsteroidSound);

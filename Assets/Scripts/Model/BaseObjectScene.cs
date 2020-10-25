@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.TimeRemainings;
 using UnityEngine;
 
 
@@ -13,6 +13,8 @@ namespace Assets.Scripts.Model
         private Collider _collider;
         private readonly float _timeToPool = 1.5f;
         private bool _isVisible;
+
+        protected TimeRemaining timeRemainingReturnToPool;
 
         public string Name
         {
@@ -43,6 +45,8 @@ namespace Assets.Scripts.Model
             Rigidbody = GetComponent<Rigidbody>();
             Transform = GetComponent<Transform>();
             prefab = GetComponent<GameObject>();
+
+            timeRemainingReturnToPool = new TimeRemaining(ReturnToPool, _timeToPool);
         }
 
         public void SetActive(bool value)
@@ -63,10 +67,10 @@ namespace Assets.Scripts.Model
             }
         }
 
-        protected IEnumerator ReturnToPool(GameObject prefab)
+        protected void ReturnToPool()
         {
-            yield return new WaitForSeconds(_timeToPool);
             prefab.GetComponent<PoolObject.PoolObject>().ReturnToPool();
+            timeRemainingReturnToPool.RemoveTimeRemaining();
         }
     }
 }

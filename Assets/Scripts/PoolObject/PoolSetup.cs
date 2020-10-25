@@ -10,7 +10,7 @@ namespace Assets.Scripts.PoolObject
     public sealed class PoolSetup : MonoBehaviour
     {
         //структуры, где пользователь задает префаб для использования в пуле и инициализируемое количество
-        [SerializeField] private PoolManager.PoolPart[] _pools;
+        [SerializeField] private PoolManager.PoolPart[] _pools = null;
 
         private void OnValidate()
         {

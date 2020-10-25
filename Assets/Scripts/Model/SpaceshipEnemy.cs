@@ -31,9 +31,9 @@ public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove, IExecute
     private readonly float _rayDistance = 100.0f;
     private Ray _ray;
     private RaycastHit _hit;
-    [SerializeField] private LayerMask _layerMask;
+    [SerializeField] private LayerMask _layerMask = 0;
 
-    [SerializeField] private Transform _gun;
+    [SerializeField] private Transform _gun = null;
     private Bullet _bullet;
     private SpaceshipModel _spaceship;
     private Spawn _spawn;
@@ -64,7 +64,7 @@ public sealed class SpaceshipEnemy : BaseObjectScene, IFire, IMove, IExecute
             prefab = PoolManager.GetObject
                 (_explosionShipPrefab, this.gameObject.transform.position, Quaternion.identity);
             //explosion return to pool
-            StartCoroutine(ReturnToPool(prefab));
+            timeRemainingReturnToPool.AddTimeRemaining();
             this.gameObject.GetComponent<PoolObject>().ReturnToPool();
             AudioManager.Instance.PlaySound(_explosionShipSound);
             OnDieChange?.Invoke(this);

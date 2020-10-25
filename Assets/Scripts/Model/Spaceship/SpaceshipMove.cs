@@ -4,7 +4,7 @@ using UnityEngine;
 
 public sealed class SpaceshipMove : SpaceshipModel, IMove
 {
-    [SerializeField] private float _normalSpeed;
+    [SerializeField] private float _normalSpeed = 0.0f;
     private float _speed;
 
     private readonly float _xMin = -40.0f;

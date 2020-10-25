@@ -7,10 +7,10 @@ namespace Assets.Scripts.UI
 {
     public sealed class MainMenuUi : BaseObjectUi
     {
-        [SerializeField] private ButtonUi _start;
-        [SerializeField] private ButtonUi _settings;
-        [SerializeField] private ButtonUi _quit;
-        [SerializeField] private GameObject[] _background;
+        [SerializeField] private ButtonUi _start = null;
+        [SerializeField] private ButtonUi _settings = null;
+        [SerializeField] private ButtonUi _quit = null;
+        [SerializeField] private GameObject[] _background = null;
 
         private readonly string _audioMainMenu = "main_menu_theme";
 

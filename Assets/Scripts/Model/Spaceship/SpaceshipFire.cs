@@ -22,10 +22,10 @@ public sealed class SpaceshipFire : SpaceshipModel
     private bool _isFire = true;
     private bool _isReady = true;
 
-    [SerializeField] private Transform _gunOne;
-    [SerializeField] private Transform _gunTwo;
-    [SerializeField] private Transform _gunThree;
-    [SerializeField] private Transform _gunFour;
+    [SerializeField] private Transform _gunOne = null;
+    [SerializeField] private Transform _gunTwo = null;
+    [SerializeField] private Transform _gunThree = null;
+    [SerializeField] private Transform _gunFour = null;
 
     public bool IsFire
     {

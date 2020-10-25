@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Manager;
 using Assets.Scripts.Model;
 using Assets.Scripts.PoolObject;
+using Assets.Scripts.TimeRemainings;
 using UnityEngine;
 
 
@@ -88,7 +89,7 @@ public sealed class SpaceshipHealth : SpaceshipModel
                 DamageTaken(_enemyShip.CollisionDamage);
                 prefab = PoolManager.GetObject
                     (_explosionShipPrefab, _enemyShip.transform.position, Quaternion.identity);
-                StartCoroutine(ReturnToPool(prefab));
+                timeRemainingReturnToPool.AddTimeRemaining();
                 _enemyShip.GetComponent<PoolObject>().ReturnToPool();
                 EnemyManager.RemoveEnemieToList(_enemyShip);
                 AudioManager.Instance.PlaySound(_explosionShipSound);
@@ -98,7 +99,7 @@ public sealed class SpaceshipHealth : SpaceshipModel
                 DamageTaken(_asteroid.CollisionDamage);
                 prefab = PoolManager.GetObject
                     (_explosionAsteroidPrefab, this.gameObject.transform.position, Quaternion.identity);
-                StartCoroutine(ReturnToPool(prefab));
+                timeRemainingReturnToPool.AddTimeRemaining();
                 _asteroid.GetComponent<PoolObject>().ReturnToPool();
                 AudioManager.Instance.PlaySound(_explosionAsteroidSound);
             }
@@ -109,7 +110,7 @@ public sealed class SpaceshipHealth : SpaceshipModel
                 prefab = PoolManager.GetObject
                     (_explosionShipPrefab, this.gameObject.transform.position, Quaternion.identity);
                 //explosion add to pool object
-                StartCoroutine(ReturnToPool(prefab));
+                timeRemainingReturnToPool.AddTimeRemaining();
                 this.gameObject.GetComponent<PoolObject>().ReturnToPool();
                 AudioManager.Instance.PlaySound(_explosionShipSound);
             }

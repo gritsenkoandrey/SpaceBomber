@@ -12,9 +12,9 @@ namespace Assets.Scripts.UI
         private bool _isPaused = false;
         private readonly byte _gameScene = 0;
 
-        [SerializeField] private ButtonUi _resume;
-        [SerializeField] private ButtonUi _mainMenu;
-        [SerializeField] private ButtonUi _quit;
+        [SerializeField] private ButtonUi _resume = null;
+        [SerializeField] private ButtonUi _mainMenu = null;
+        [SerializeField] private ButtonUi _quit = null;
 
 
         protected override void Awake()

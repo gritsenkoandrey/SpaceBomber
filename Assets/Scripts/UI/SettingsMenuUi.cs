@@ -5,7 +5,7 @@ namespace Assets.Scripts.UI
 {
     public sealed class SettingsMenuUi : BaseObjectUi
     {
-        [SerializeField] private ButtonUi _back;
+        [SerializeField] private ButtonUi _back = null;
 
         protected override void Awake()
         {
